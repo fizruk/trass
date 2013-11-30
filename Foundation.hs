@@ -19,6 +19,7 @@ import Model
 import Text.Jasmine (minifym)
 import Text.Hamlet (hamletFile)
 import System.Log.FastLogger (Logger)
+import Yesod.Form.Nic (YesodNic)
 
 -- | The site argument for your application. This can be a good place to
 -- keep settings and values requiring initialization before your application
@@ -32,6 +33,8 @@ data App = App
     , persistConfig :: Settings.PersistConf
     , appLogger :: Logger
     }
+
+instance YesodNic App
 
 -- Set up i18n messages. See the message folder.
 mkMessage "App" "messages" "en"
