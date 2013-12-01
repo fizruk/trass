@@ -9,8 +9,7 @@ getHomeR = do
     ma <- maybeAuth
     let maybeLogin = userIdent . entityVal <$> ma
     defaultLayout $ do
-        aDomId <- newIdent
-        setTitle "Welcome To Yesod!"
+        setTitle "trass - The Rigorous Assignment Submission System"
         $(widgetFile "header")
         $(widgetFile "homepage")
 
