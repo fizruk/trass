@@ -1,0 +1,14 @@
+<ul class="nav nav-tabs">
+  <li>
+    <a href="">problems
+  <li>
+    <a href="">submits
+  <li>
+    <a href="">about
+  <li class="pull-right">
+    $maybe name <- maybeLogin
+      <a href=@{AuthR LogoutR}>
+        Log out (#{name})
+    $nothing
+      <a href=@{AuthR LoginR}>
+        Log in
