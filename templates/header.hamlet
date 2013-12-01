@@ -4,7 +4,7 @@
   <li>
     <a href="">submits
   <li>
-    <a href="">about
+    <a href=@{AboutR}>about
   <li class="pull-right">
     $maybe name <- maybeLogin
       <a href=@{AuthR LogoutR}>
