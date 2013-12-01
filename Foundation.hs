@@ -1,6 +1,7 @@
 module Foundation where
 
 import Prelude
+import Control.Applicative
 import Yesod
 import Yesod.Static
 import Yesod.Auth
@@ -67,6 +68,10 @@ instance Yesod App where
         -- default-layout-wrapper is the entire page. Since the final
         -- value passed to hamletToRepHtml cannot be a widget, this allows
         -- you to use normal widget features in default-layout.
+
+        ma <- maybeAuth
+        let maybeLogin   = userIdent . entityVal <$> ma
+            headerWidget = $(widgetFile "header")
 
         pc <- widgetToPageContent $ do
             $(combineStylesheets 'StaticR
