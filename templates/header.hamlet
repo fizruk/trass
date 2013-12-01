@@ -5,10 +5,13 @@
     <a href="">_{MsgMenuSubmits}
   <li>
     <a href=@{AboutR}>_{MsgMenuAbout}
-  <li class="pull-right">
-    $maybe name <- maybeLogin
+  $maybe name <- maybeLogin
+    <li class="pull-right">
       <a href=@{AuthR LogoutR}>
         _{MsgMenuLogout} (#{name})
-    $nothing
+    <li class="pull-right">
+      <a href=@{AdminR}>_{MsgMenuAdmin}
+  $nothing
+    <li class="pull-right">
       <a href=@{AuthR LoginR}>
         _{MsgMenuLogin}
