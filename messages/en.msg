@@ -14,10 +14,13 @@ AdminText: Here be some admin tools.
 CoursesTitle: Courses
 CourseNo: No.
 CourseName: Course name
-CourseRepo: A repository containing course materials.
+CourseRepo: A repository containing course materials
+CourseRepoName: Course repository name
 
 NoCourses: There are not courses yet.
 StartNewCourse: Start a new course? 
+NewCourseTitle: Starting a new course
+NewCourseSubmit: Start course
 
 AboutTitle: About trass
 AboutText: trass is an assignment submission system.
