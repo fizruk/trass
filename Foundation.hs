@@ -4,7 +4,7 @@ import Prelude
 import Yesod
 import Yesod.Static
 import Yesod.Auth
-import Yesod.Auth.BrowserId
+import Yesod.Auth.Email
 import Yesod.Auth.GoogleEmail
 import Yesod.Default.Config
 import Yesod.Default.Util (addStaticContentExternal)
@@ -54,6 +54,9 @@ type Form x = Html -> MForm (HandlerT App IO) (FormResult x, Widget)
 -- of settings which can be configured by overriding methods here.
 instance Yesod App where
     approot = ApprootMaster $ appRoot . settings
+
+    isAuthorized BlogR True = isAdmin
+    isAuthorized _ _ = return Authorized
 
     -- Store session data on the client in encrypted cookies,
     -- default session idle timeout is 120 minutes
@@ -133,9 +136,16 @@ instance YesodAuth App where
                 fmap Just $ insert $ User (credsIdent creds) Nothing
 
     -- You can add other plugins like BrowserID, email or OAuth here
-    authPlugins _ = [authBrowserId def, authGoogleEmail]
+    authPlugins _ = [ authGoogleEmail ]
 
     authHttpManager = httpManager
+
+-- check whether authenticated user is admin
+isAdmin = do
+  ma <- maybeAuthId
+  case ma of
+    Nothing -> return AuthenticationRequired
+    Just _  -> unauthorizedI MsgNotAnAdmin
 
 -- This instance is required to use forms. You can modify renderMessage to
 -- achieve customized and internationalized form validation messages.

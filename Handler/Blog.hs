@@ -3,6 +3,7 @@ module Handler.Blog where
 import Import
 
 import Yesod.Form.Nic (nicHtmlField)
+import Yesod.Auth
 
 entryForm :: Form Article
 entryForm = renderDivs $ Article
@@ -13,7 +14,10 @@ getBlogR :: Handler Html
 getBlogR = do
   articles <- runDB $ selectList [] [Desc ArticleTitle]
   (articleWidget, enctype) <- generateFormPost entryForm
+  ma <- maybeAuth
+  let maybeLogin = userIdent . entityVal <$> ma
   defaultLayout $ do
+    $(widgetFile "header")
     $(widgetFile "articles")
 
 postBlogR :: Handler Html
