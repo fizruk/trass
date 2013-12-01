@@ -1,14 +1,14 @@
 <ul class="nav nav-tabs">
   <li>
-    <a href="">problems
+    <a href="">_{MsgMenuProblems}
   <li>
-    <a href="">submits
+    <a href="">_{MsgMenuSubmits}
   <li>
-    <a href=@{AboutR}>about
+    <a href=@{AboutR}>_{MsgMenuAbout}
   <li class="pull-right">
     $maybe name <- maybeLogin
       <a href=@{AuthR LogoutR}>
-        Log out (#{name})
+        _{MsgMenuLogout} (#{name})
     $nothing
       <a href=@{AuthR LoginR}>
-        Log in
+        _{MsgMenuLogin}
