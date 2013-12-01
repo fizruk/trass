@@ -22,6 +22,9 @@ library
                      Handler.Home
                      Handler.About
                      Handler.Admin
+                     Handler.AdminCourses
+                     Handler.AdminNewCourse
+                     Handler.AdminCourse
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT

@@ -1,0 +1,16 @@
+<h1> _{MsgCoursesTitle} #
+  <small>_{MsgAdminSubtitle}
+$if null courses
+  <p> _{MsgNoCourses} #
+    <a href=@{AdminNewCourseR}> _{MsgStartNewCourse}
+$else
+  <table .table>
+    <th>
+      <td> _{MsgCourseNo}
+      <td> _{MsgCourseName}
+      <td> _{MsgCourseRepo}
+    $forall (n, Entity courseId course) <- courses
+      <tr>
+        <td> #{n}
+        <td> #{courseName course}
+        <td> #{courseRepo course}

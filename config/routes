@@ -7,3 +7,6 @@
 / HomeR GET
 /about AboutR GET
 /admin AdminR GET
+/admin/courses AdminCoursesR GET
+/admin/new/course AdminNewCourseR GET POST
+/admin/course/#CourseId AdminCourseR GET
