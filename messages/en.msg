@@ -20,7 +20,7 @@ CourseRepoName: Course repository name
 
 StartNewCourse: New course
 StartNewCourseQuestion: Start a new course? 
-NoCourses: There are not courses yet.
+NoCourses: There are no courses yet.
 NewCourseTitle: Starting a new course
 NewCourseSubmit: Start course
 

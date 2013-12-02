@@ -1,11 +1,12 @@
 <h1> _{MsgCoursesTitle} #
   <small>_{MsgAdminSubtitle}
-$if null courses
-  <p> _{MsgNoCourses} #
-    <a href=@{AdminNewCourseR}> _{MsgStartNewCourseQuestion}
-$else
-  <div .table-responsive>
-    <div .panel .panel-default>
+<div .table-responsive>
+  <div .panel .panel-default>
+    $if null courses
+      <div .panel-body>
+        _{MsgNoCourses}
+        <a href=@{AdminNewCourseR} .pull-right .btn .btn-success type=button> _{MsgStartNewCourse}
+    $else
       <div .panel-body>
         _{MsgCoursesText (length courses)}
         <a href=@{AdminNewCourseR} .pull-right .btn .btn-success type=button> _{MsgStartNewCourse}
