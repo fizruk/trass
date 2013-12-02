@@ -28,18 +28,21 @@ data CourseProblem = CourseProblem
 
 data CourseSubmission = CourseSubmission
 
-readCourseRepository :: Text -> Handler CourseRepository
+readCourseRepository :: Text -> Handler (Maybe CourseRepository)
 readCourseRepository name = do
   lang <- fromMaybe "en" <$> lookupSession "_LANG"
   let path = "courses" </> T.unpack name </> T.unpack lang
-  CourseRepository
-    <$> pure (T.pack path)
-    <*> pure ""
-    <*> readDesc path
-    <*> pure []
-    <*> pure []
-    <*> readProblems path
-    <*> pure []
+  exists <- liftIO $ doesDirectoryExist path
+  if not exists
+    then return Nothing
+    else fmap Just $ CourseRepository
+      <$> pure (T.pack path)
+      <*> pure ""
+      <*> readDesc path
+      <*> pure []
+      <*> pure []
+      <*> readProblems path
+      <*> pure []
 
 readDesc :: FilePath -> Handler Widget
 readDesc path = pure [whamlet| _{MsgNoDescription} |]
