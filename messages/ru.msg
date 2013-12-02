@@ -5,6 +5,7 @@ MenuCourses: Курсы
 MenuProblems: Задачи
 MenuSubmits: Посылки
 MenuAbout: О trass
+MenuLanguage: Язык
 MenuLogout: Выйти
 MenuLogin: Войти
 
