@@ -5,6 +5,7 @@ MenuCourses: Courses
 MenuProblems: Problems
 MenuSubmits: Submits
 MenuAbout: About
+MenuLanguage: Language
 MenuLogout: Log out
 MenuLogin: Log in
 

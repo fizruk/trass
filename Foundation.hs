@@ -21,6 +21,9 @@ import Text.Jasmine (minifym)
 import Text.Hamlet (hamletFile)
 import System.Log.FastLogger (Logger)
 
+import Data.Maybe (fromMaybe)
+import Data.Text (Text)
+
 -- | The site argument for your application. This can be a good place to
 -- keep settings and values requiring initialization before your application
 -- starts running, such as database connections. Every handler will have
@@ -74,13 +77,22 @@ instance Yesod App where
         -- you to use normal widget features in default-layout.
 
         ma <- maybeAuth
-        let maybeLogin   = userIdent . entityVal <$> ma
+        lang <- lookupSession "_LANG"
+        let langs = 
+              [ ("en", "English")
+              , ("ru", "Русский") ] :: [(Text, Text)]
+            currentLang = fromMaybe "English" $ lang >>= flip lookup langs
+            maybeLogin   = userIdent . entityVal <$> ma
             headerWidget = $(widgetFile "header")
 
         pc <- widgetToPageContent $ do
             $(combineStylesheets 'StaticR
                 [ css_normalize_css
                 , css_bootstrap_css
+                ])
+            $(combineScripts 'StaticR
+                [ js_jquery_js
+                , js_bootstrap_js
                 ])
             $(widgetFile "default-layout")
         giveUrlRenderer $(hamletFile "templates/default-layout-wrapper.hamlet")

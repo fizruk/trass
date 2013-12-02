@@ -1,19 +1,36 @@
-<ul class="nav nav-tabs">
-  <li>
-    <a href=@{CoursesR}>_{MsgMenuCourses}
-  <li>
-    <a href="">_{MsgMenuProblems}
-  <li>
-    <a href="">_{MsgMenuSubmits}
-  <li>
-    <a href=@{AboutR}>_{MsgMenuAbout}
-  $maybe name <- maybeLogin
-    <li class="pull-right">
-      <a href=@{AuthR LogoutR}>
-        _{MsgMenuLogout} (#{name})
-    <li class="pull-right">
-      <a href=@{AdminR}>_{MsgMenuAdmin}
-  $nothing
-    <li class="pull-right">
-      <a href=@{AuthR LoginR}>
-        _{MsgMenuLogin}
+<nav .navbar .navbar-default role="navigation">
+  <div .navbar-header>
+    <button type="button" .navbar-toggle data-toggle="collapse" data-target="#trass-header-navbar">
+      <span .sr-only> Toggle navigation
+      <span .icon-bar>
+      <span .icon-bar>
+      <span .icon-bar>
+    <a .navbar-brand href=@{HomeR}> trass
+
+  <div .collapse .navbar-collapse #trass-header-navbar>
+    <ul .nav .navbar-nav>
+      <li>
+        <a href=@{CoursesR}>_{MsgMenuCourses}
+      <li>
+        <a href="">_{MsgMenuProblems}
+      <li>
+        <a href="">_{MsgMenuSubmits}
+      <li>
+        <a href=@{AboutR}>_{MsgMenuAbout}
+      <li .dropdown>
+        <a href="#" .dropdown-toggle data-toggle="dropdown">
+          _{MsgMenuLanguage}: #{currentLang}
+          <b .caret>
+        <ul .dropdown-menu role="menu">
+          $forall (val, lang) <- langs
+            <li>
+              <a href="#{val}"> #{lang}
+    <ul .nav .navbar-nav .navbar-right>
+      $maybe name <- maybeLogin
+        <li>
+          <a href=@{AdminR}>_{MsgMenuAdmin}
+        <li>
+          <a href=@{AuthR LogoutR}> _{MsgMenuLogout} (#{name})
+      $nothing
+        <li>
+          <a href=@{AuthR LoginR}> _{MsgMenuLogin}
