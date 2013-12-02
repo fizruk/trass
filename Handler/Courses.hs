@@ -7,8 +7,8 @@ import Control.Monad
 getCoursesR :: Handler Html
 getCoursesR = do
   cs <- runDB $ selectList [] [Asc CourseId]
-  courses <- forM cs $ \(Entity courseId (Course name repo)) -> do
+  courses <- forM cs $ \(Entity courseId (Course _ repo)) -> do
     cr <- readCourseRepository repo
-    return (courseId, name, cr)
+    return (courseId, cr)
   defaultLayout $ do
     $(widgetFile "courses")

@@ -4,6 +4,9 @@ import Import
 import Control.Monad
 import qualified Data.Text as T
 import System.Directory
+import System.FilePath
+
+import Data.Maybe
 
 data CourseRepository = CourseRepository
   { crName        :: Text
@@ -26,16 +29,17 @@ data CourseProblem = CourseProblem
 data CourseSubmission = CourseSubmission
 
 readCourseRepository :: Text -> Handler CourseRepository
-readCourseRepository name = CourseRepository
-  <$> pure name
-  <*> pure ""
-  <*> readDesc path
-  <*> pure []
-  <*> pure []
-  <*> readProblems path
-  <*> pure []
-  where
-    path = "courses/" ++ T.unpack name
+readCourseRepository name = do
+  lang <- fromMaybe "en" <$> lookupSession "_LANG"
+  let path = "courses" </> T.unpack name </> T.unpack lang
+  CourseRepository
+    <$> pure (T.pack path)
+    <*> pure ""
+    <*> readDesc path
+    <*> pure []
+    <*> pure []
+    <*> readProblems path
+    <*> pure []
 
 readDesc :: FilePath -> Handler Widget
 readDesc path = pure [whamlet| _{MsgNoDescription} |]
