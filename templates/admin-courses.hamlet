@@ -4,13 +4,16 @@ $if null courses
   <p> _{MsgNoCourses} #
     <a href=@{AdminNewCourseR}> _{MsgStartNewCourse}
 $else
-  <table .table>
-    <th>
-      <td> _{MsgCourseNo}
-      <td> _{MsgCourseName}
-      <td> _{MsgCourseRepo}
-    $forall (n, Entity courseId course) <- courses
-      <tr>
-        <td> #{n}
-        <td> #{courseName course}
-        <td> #{courseRepo course}
+  <div .table-responsive>
+    <table .table .table-bordered>
+      <thead>
+        <tr>
+          <td> _{MsgCourseNo}
+          <td> _{MsgCourseName}
+          <td> _{MsgCourseRepo}
+      <tbody>
+        $forall (n, Entity courseId course) <- courses
+          <tr>
+            <td> #{n}
+            <td> <a href=@{AdminCourseR courseId}> #{courseName course}
+            <td> #{courseRepo course}
