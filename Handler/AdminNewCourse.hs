@@ -1,6 +1,9 @@
 module Handler.AdminNewCourse where
 
 import Import
+import System.Process
+import System.Exit
+import Data.Text
 
 getAdminNewCourseR :: Handler Html
 getAdminNewCourseR = do
@@ -11,6 +14,11 @@ postAdminNewCourseR :: Handler Html
 postAdminNewCourseR = do
   name <- runInputPost $ ireq textField "courseName"
   repo <- runInputPost $ ireq textField "courseRepo"
-  courseId <- runDB $ insert (Course name repo)
-  redirect (AdminCourseR courseId)
+  exitCode <- liftIO . system $ "./courses/new-course-repo " ++ show (unpack repo)
+  case exitCode of
+    ExitSuccess -> do
+      courseId <- runDB $ insert (Course name repo)
+      redirect (AdminCourseR courseId)
+    _ -> do
+      defaultLayout $ [whamlet| Internal server error. |]
 

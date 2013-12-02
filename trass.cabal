@@ -74,6 +74,7 @@ library
                  , conduit                       >= 1.0
                  , monad-logger                  >= 0.3
                  , fast-logger                   >= 0.3
+                 , process                       >= 1.1
 
 executable         trass
     if flag(library-only)
