@@ -3,15 +3,16 @@ module CourseRepository where
 import Import
 import Control.Monad
 import qualified Data.Text as T
+import qualified Data.Text.IO as T
 import System.Directory
 import System.FilePath
 
 import Data.Maybe
 
 data CourseRepository = CourseRepository
-  { crName        :: Text
+  { crName        :: Maybe Text
   , crCloneUrl    :: Text
-  , crDescription :: Widget
+  , crDescription :: Maybe Text
   , crMaterials   :: [CourseMaterial]
   , crExercises   :: [CourseExercise]
   , crProblems    :: [CourseProblem]
@@ -22,8 +23,8 @@ data CourseMaterial   = CourseMaterial
 data CourseExercise   = CourseExercise
 
 data CourseProblem = CourseProblem
-  { crProblemName   :: Text
-  , crProblemDesc   :: Widget
+  { crProblemName   :: Maybe Text
+  , crProblemDesc   :: Maybe Text
   }
 
 data CourseSubmission = CourseSubmission
@@ -36,7 +37,7 @@ readCourseRepository name = do
   if not exists
     then return Nothing
     else fmap Just $ CourseRepository
-      <$> pure (T.pack path)
+      <$> readTitle path
       <*> pure ""
       <*> readDesc path
       <*> pure []
@@ -44,18 +45,24 @@ readCourseRepository name = do
       <*> readProblems path
       <*> pure []
 
-readDesc :: FilePath -> Handler Widget
-readDesc path = pure [whamlet| _{MsgNoDescription} |]
+readDesc :: FilePath -> Handler (Maybe Text)
+readDesc path = liftIO $ tryReadFile (path </> "desc.txt")
   where
     filename = path ++ "/desc.html"
 
+readTitle :: FilePath -> Handler (Maybe Text)
+readTitle path = liftIO $ tryReadFile (path </> "title.txt")
+
+tryReadFile :: FilePath -> IO (Maybe Text)
+tryReadFile file = (Just <$> T.readFile file) `mplus` return Nothing
+
 readProblems :: FilePath -> Handler [CourseProblem]
 readProblems path = do
-  ps <- liftIO $ getDirectoryContents (path ++ "/problems") `mplus` pure []
+  ps <- liftIO $ getDirectoryContents (path </> "problems") `mplus` pure []
   mapM readProblem ps
 
 readProblem :: FilePath -> Handler CourseProblem
 readProblem path = CourseProblem
-  <$> pure "noname"
+  <$> readTitle path
   <*> readDesc path
 

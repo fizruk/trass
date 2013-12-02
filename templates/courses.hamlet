@@ -2,5 +2,13 @@
 $forall (courseId, cr) <- courses
   <div .panel .panel-default>
     <div .panel-heading>
-      <a href=""> #{crName cr}
-    <div .panel-body> ^{crDescription cr}
+      <a href="">
+        $maybe name <- crName cr
+          #{name}
+        $nothing
+          _{MsgNoTitle}
+    <div .panel-body>
+      $maybe desc <- crDescription cr
+        #{desc}
+      $nothing
+        _{MsgNoDescription}

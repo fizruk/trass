@@ -26,6 +26,7 @@ NewCourseTitle: Starting a new course
 NewCourseSubmit: Start course
 
 NoDescription: No description.
+NoTitle: No title
 
 AboutTitle: About trass
 AboutText: trass is an assignment submission system.
