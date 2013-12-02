@@ -8,5 +8,9 @@ getAdminNewCourseR = do
     $(widgetFile "admin-new-course")
 
 postAdminNewCourseR :: Handler Html
-postAdminNewCourseR = error "Not yet implemented: postAdminNewCourseR"
+postAdminNewCourseR = do
+  name <- runInputPost $ ireq textField "courseName"
+  repo <- runInputPost $ ireq textField "courseRepo"
+  courseId <- runDB $ insert (Course name repo)
+  redirect (AdminCourseR courseId)
 

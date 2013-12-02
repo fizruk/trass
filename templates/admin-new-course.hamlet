@@ -4,11 +4,11 @@
   <div .form-group>
     <label .col-sm-2 .control-label> _{MsgCourseName}
     <div .col-sm-10>
-      <input .form-control type=text id=courseName placeholder="_{MsgCourseName}">
+      <input .form-control type=text name=courseName placeholder="_{MsgCourseName}">
   <div .form-group>
     <label .col-sm-2 .control-label> _{MsgCourseRepoName}
     <div .col-sm-10>
-      <input .form-control type=text id=courseRepo placeholder="_{MsgCourseRepoName}">
+      <input .form-control type=text name=courseRepo placeholder="_{MsgCourseRepoName}">
   <div .form-group>
     <div .col-sm-offset-2 .col-sm-10>
       <input .btn .btn-default type=submit value="_{MsgNewCourseSubmit}">
