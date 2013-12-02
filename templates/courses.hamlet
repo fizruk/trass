@@ -1,6 +1,6 @@
 <h1> _{MsgCoursesTitle}
-$forall (courseId, name, desc) <- courses
+$forall (courseId, name, cr) <- courses
   <div .panel .panel-default>
     <div .panel-heading>
       <a href=""> #{name}
-    <div .panel-body> #{desc}
+    <div .panel-body> ^{crDescription cr}

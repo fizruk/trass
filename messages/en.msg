@@ -19,6 +19,8 @@ CourseName: Course name
 CourseRepo: Course repository
 CourseRepoName: Course repository name
 
+CourseNoDescription: No description.
+
 StartNewCourse: New course
 StartNewCourseQuestion: Start a new course? 
 NoCourses: There are no courses yet.
