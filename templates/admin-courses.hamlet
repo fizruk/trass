@@ -2,18 +2,22 @@
   <small>_{MsgAdminSubtitle}
 $if null courses
   <p> _{MsgNoCourses} #
-    <a href=@{AdminNewCourseR}> _{MsgStartNewCourse}
+    <a href=@{AdminNewCourseR}> _{MsgStartNewCourseQuestion}
 $else
   <div .table-responsive>
-    <table .table .table-bordered>
-      <thead>
-        <tr>
-          <td> _{MsgCourseNo}
-          <td> _{MsgCourseName}
-          <td> _{MsgCourseRepo}
-      <tbody>
-        $forall (n, Entity courseId course) <- courses
+    <div .panel .panel-default>
+      <div .panel-body>
+        _{MsgCoursesText (length courses)}
+        <a href=@{AdminNewCourseR} .pull-right .btn .btn-success type=button> _{MsgStartNewCourse}
+      <table .table .table-bordered>
+        <thead>
           <tr>
-            <td> #{n}
-            <td> <a href=@{AdminCourseR courseId}> #{courseName course}
-            <td> #{courseRepo course}
+            <th> _{MsgCourseNo}
+            <th> _{MsgCourseName}
+            <th> _{MsgCourseRepo}
+        <tbody>
+          $forall (n, Entity courseId course) <- courses
+            <tr>
+              <td> #{n}
+              <td> <a href=@{AdminCourseR courseId}> #{courseName course}
+              <td> #{courseRepo course}
