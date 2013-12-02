@@ -75,6 +75,8 @@ instance Yesod App where
         -- default-layout-wrapper is the entire page. Since the final
         -- value passed to hamletToRepHtml cannot be a widget, this allows
         -- you to use normal widget features in default-layout.
+        
+        setUltDestCurrent
 
         ma <- maybeAuth
         lang <- lookupSession "_LANG"

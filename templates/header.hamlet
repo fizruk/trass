@@ -24,7 +24,7 @@
         <ul .dropdown-menu role="menu">
           $forall (val, lang) <- langs
             <li>
-              <a href="#{val}"> #{lang}
+              <a href="@{LanguageR val}"> #{lang}
     <ul .nav .navbar-nav .navbar-right>
       $maybe name <- maybeLogin
         <li>
