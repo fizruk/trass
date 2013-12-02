@@ -19,13 +19,13 @@ CourseName: Course name
 CourseRepo: Course repository
 CourseRepoName: Course repository name
 
-CourseNoDescription: No description.
-
 StartNewCourse: New course
 StartNewCourseQuestion: Start a new course? 
 NoCourses: There are no courses yet.
 NewCourseTitle: Starting a new course
 NewCourseSubmit: Start course
+
+NoDescription: No description.
 
 AboutTitle: About trass
 AboutText: trass is an assignment submission system.

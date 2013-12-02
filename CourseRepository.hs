@@ -1,6 +1,9 @@
 module CourseRepository where
 
 import Import
+import Control.Monad
+import qualified Data.Text as T
+import System.Directory
 
 data CourseRepository = CourseRepository
   { crName        :: Text
@@ -14,15 +17,38 @@ data CourseRepository = CourseRepository
 
 data CourseMaterial   = CourseMaterial
 data CourseExercise   = CourseExercise
-data CourseProblem    = CourseProblem
+
+data CourseProblem = CourseProblem
+  { crProblemName   :: Text
+  , crProblemDesc   :: Widget
+  }
+
 data CourseSubmission = CourseSubmission
 
 readCourseRepository :: Text -> Handler CourseRepository
 readCourseRepository name = CourseRepository
   <$> pure name
   <*> pure ""
-  <*> pure [whamlet| _{MsgCourseNoDescription} |]
+  <*> readDesc path
   <*> pure []
   <*> pure []
+  <*> readProblems path
   <*> pure []
-  <*> pure []
+  where
+    path = "courses/" ++ T.unpack name
+
+readDesc :: FilePath -> Handler Widget
+readDesc path = pure [whamlet| _{MsgNoDescription} |]
+  where
+    filename = path ++ "/desc.html"
+
+readProblems :: FilePath -> Handler [CourseProblem]
+readProblems path = do
+  ps <- liftIO $ getDirectoryContents (path ++ "/problems") `mplus` pure []
+  mapM readProblem ps
+
+readProblem :: FilePath -> Handler CourseProblem
+readProblem path = CourseProblem
+  <$> pure "noname"
+  <*> readDesc path
+
