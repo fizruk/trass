@@ -14,7 +14,7 @@ AdminText: Here be some admin tools.
 CoursesTitle: Courses
 CourseNo: No.
 CourseName: Course name
-CourseRepo: A repository containing course materials
+CourseRepo: Course repository
 CourseRepoName: Course repository name
 
 NoCourses: There are not courses yet.

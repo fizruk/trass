@@ -1,0 +1,5 @@
+<h1> #{courseName course}
+  <small> _{MsgAdminSubtitle}
+<div .input-group>
+  <span .input-group-addon> _{MsgCourseRepo}
+  <input .form-control type=text value="#{courseRepo course}">
