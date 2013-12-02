@@ -10,3 +10,4 @@
 /admin/courses AdminCoursesR GET
 /admin/new/course AdminNewCourseR GET POST
 /admin/course/#CourseId AdminCourseR GET
+/courses CoursesR GET

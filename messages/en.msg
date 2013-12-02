@@ -1,6 +1,7 @@
 Hello: Hello
 
 MenuAdmin: Admin
+MenuCourses: Courses
 MenuProblems: Problems
 MenuSubmits: Submits
 MenuAbout: About

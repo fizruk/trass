@@ -1,5 +1,7 @@
 <ul class="nav nav-tabs">
   <li>
+    <a href=@{CoursesR}>_{MsgMenuCourses}
+  <li>
     <a href="">_{MsgMenuProblems}
   <li>
     <a href="">_{MsgMenuSubmits}
