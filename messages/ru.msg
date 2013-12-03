@@ -14,7 +14,7 @@ AdminSubtitle: (администратор)
 AdminText: Here be some admin tools.
 
 CoursesTitle: Курсы
-CoursesText count@Int: Доступно #{show count} #{plural count "курс" "курсы"}.
+CoursesText count@Int: Доступно #{show count} #{plural_ru count "курс" "курса" "курсов"}.
 CourseNo: №
 CourseName: Наименование курса
 CourseRepo: Репозиторий курса

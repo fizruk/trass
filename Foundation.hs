@@ -44,6 +44,16 @@ plural :: Int -> String -> String -> String
 plural 1 s _ = s
 plural _ _ p = p
 
+plural_ru :: Int -> String -> String -> String -> String
+plural_ru n s p m
+  | n10 == 1 && n100 /= 11 = s
+  | 2 <= n10 && n10 <= 4 &&
+    (12 >= n100 || 14 <= n100) = p
+  | otherwise = m
+  where
+    n10  = n `mod` 10
+    n100 = n `mod` 100
+
 -- This is where we define all of the routes in our application. For a full
 -- explanation of the syntax, please see:
 -- http://www.yesodweb.com/book/routing-and-handlers
