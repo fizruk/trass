@@ -21,10 +21,11 @@
           <th> _{MsgProblemTitle}
         <tbody>
           $forall problem <- crProblems course
-            <tr>
-              <td>
-                $maybe name <- crProblemName problem
-                  #{name}
-                $nothing
-                  _{MsgNoTitle}
+            <a href=@{CourseProblemR courseId (crProblemDir problem)}>
+              <tr>
+                <td>
+                  $maybe name <- crProblemName problem
+                    #{name}
+                  $nothing
+                    _{MsgNoTitle}
       

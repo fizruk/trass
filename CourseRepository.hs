@@ -26,7 +26,8 @@ data CourseMaterial   = CourseMaterial
 data CourseExercise   = CourseExercise
 
 data CourseProblem = CourseProblem
-  { crProblemName   :: Maybe Text
+  { crProblemDir    :: FilePath
+  , crProblemName   :: Maybe Text
   , crProblemDesc   :: Maybe Html
   }
 
@@ -52,12 +53,15 @@ readProblems :: FilePath -> Handler [CourseProblem]
 readProblems path = do
   ps <- liftIO $ getDirectoryContents (path </> "problems") `mplus` pure []
   let ps' = filter (not . isPrefixOf ".") ps
-  mapM (readProblem . (\p -> path </> "problems" </> p)) ps'
+  mapM (readProblem (path </> "problems")) ps'
 
-readProblem :: FilePath -> Handler CourseProblem
-readProblem path = CourseProblem
-  <$> readTitle path
+readProblem :: FilePath -> FilePath -> Handler CourseProblem
+readProblem parent prob = CourseProblem
+  <$> pure prob
+  <*> readTitle path
   <*> readDesc path
+  where
+    path = parent </> prob
 
 readTitle :: FilePath -> Handler (Maybe Text)
 readTitle path = maybeReadText (path </> "title") [".txt"]
