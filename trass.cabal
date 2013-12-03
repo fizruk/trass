@@ -29,6 +29,7 @@ library
                      Handler.Courses
                      Handler.Language
                      Handler.Course
+                     Handler.CourseProblem
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT
