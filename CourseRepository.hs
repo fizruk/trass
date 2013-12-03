@@ -3,16 +3,19 @@ module CourseRepository where
 import Import
 import Control.Monad
 import qualified Data.Text as T
+import qualified Data.Text.Lazy as TL
 import qualified Data.Text.IO as T
 import System.Directory
 import System.FilePath
+import Text.Markdown
+import Text.Blaze.Html.Renderer.Text (renderHtml)
 
 import Data.Maybe
 
 data CourseRepository = CourseRepository
   { crName        :: Maybe Text
   , crCloneUrl    :: Text
-  , crDescription :: Maybe Text
+  , crDescription :: Maybe Html
   , crMaterials   :: [CourseMaterial]
   , crExercises   :: [CourseExercise]
   , crProblems    :: [CourseProblem]
@@ -24,7 +27,7 @@ data CourseExercise   = CourseExercise
 
 data CourseProblem = CourseProblem
   { crProblemName   :: Maybe Text
-  , crProblemDesc   :: Maybe Text
+  , crProblemDesc   :: Maybe Html
   }
 
 data CourseSubmission = CourseSubmission
@@ -45,10 +48,10 @@ readCourseRepository name = do
       <*> readProblems path
       <*> pure []
 
-readDesc :: FilePath -> Handler (Maybe Text)
-readDesc path = liftIO $ tryReadFile (path </> "desc.txt")
-  where
-    filename = path ++ "/desc.html"
+readDesc :: FilePath -> Handler (Maybe Html)
+readDesc path = liftIO $ do
+  contents <- tryReadFile (path </> "desc.md")
+  return $ markdown def . TL.pack . T.unpack <$> contents
 
 readTitle :: FilePath -> Handler (Maybe Text)
 readTitle path = liftIO $ tryReadFile (path </> "title.txt")

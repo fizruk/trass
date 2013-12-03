@@ -79,6 +79,8 @@ library
                  , fast-logger                   >= 0.3
                  , process                       >= 1.1
                  , filepath                      >= 1.3
+                 , blaze-html                    >= 0.4
+                 , markdown                      >= 0.1
 
 executable         trass
     if flag(library-only)
