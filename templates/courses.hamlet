@@ -2,7 +2,7 @@
 $forall (courseId, cr) <- courses
   <div .panel .panel-default>
     <div .panel-heading>
-      <a href="">
+      <a href=@{CourseR courseId}>
         $maybe name <- crName cr
           #{name}
         $nothing

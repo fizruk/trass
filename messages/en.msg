@@ -26,8 +26,12 @@ NoCourses: There are no courses yet.
 NewCourseTitle: Starting a new course
 NewCourseSubmit: Start course
 
+ProblemsText count@Int: This course has #{show count} #{plural count "problem" "problems"}.
+ProblemTitle: Problem title
+
 NoDescription: No description.
 NoTitle: No title
+NoProblems: There no problems in this course yet.
 
 AboutTitle: About trass
 AboutText: trass is an assignment submission system.

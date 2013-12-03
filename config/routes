@@ -12,3 +12,4 @@
 /admin/course/#CourseId AdminCourseR GET
 /courses CoursesR GET
 /language/#Text LanguageR GET
+/course/#CourseId CourseR GET

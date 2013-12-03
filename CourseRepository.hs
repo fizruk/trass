@@ -10,6 +10,7 @@ import System.FilePath
 import Text.Markdown
 
 import Data.Maybe
+import Data.List
 
 data CourseRepository = CourseRepository
   { crName        :: Maybe Text
@@ -50,7 +51,8 @@ readCourseRepository name = do
 readProblems :: FilePath -> Handler [CourseProblem]
 readProblems path = do
   ps <- liftIO $ getDirectoryContents (path </> "problems") `mplus` pure []
-  mapM readProblem ps
+  let ps' = filter (not . isPrefixOf ".") ps
+  mapM (readProblem . (\p -> path </> "problems" </> p)) ps'
 
 readProblem :: FilePath -> Handler CourseProblem
 readProblem path = CourseProblem

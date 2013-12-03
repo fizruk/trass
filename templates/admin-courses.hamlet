@@ -10,7 +10,7 @@
       <div .panel-body>
         _{MsgCoursesText (length courses)}
         <a href=@{AdminNewCourseR} .pull-right .btn .btn-success type=button> _{MsgStartNewCourse}
-      <table .table .table-bordered>
+      <table .table>
         <thead>
           <tr>
             <th> _{MsgCourseNo}

@@ -1,0 +1,30 @@
+<h1>
+  $maybe name <- crName course
+    #{name}
+  $nothing
+    _{MsgNoTitle}
+<p>
+  $maybe desc <- crDescription course
+    #{desc}
+  $nothing
+    _{MsgNoDescription}
+<div .table-responsive>
+  <div .panel .panel-default>
+    $if null (crProblems course)
+      <div .panel-body>
+        _{MsgNoProblems}
+    $else
+      <div .panel-body>
+        _{MsgProblemsText (length $ crProblems course)}
+      <table .table .table>
+        <thead>
+          <th> _{MsgProblemTitle}
+        <tbody>
+          $forall problem <- crProblems course
+            <tr>
+              <td>
+                $maybe name <- crProblemName problem
+                  #{name}
+                $nothing
+                  _{MsgNoTitle}
+      
