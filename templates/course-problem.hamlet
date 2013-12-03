@@ -1,0 +1,10 @@
+<h1>
+  $maybe name <- crProblemName problem
+    #{name}
+  $nothing
+    _{MsgNoTitle}
+<p>
+  $maybe desc <- crProblemDesc problem
+    #{desc}
+  $nothing
+    _{MsgNoDescription}
