@@ -1,1 +1,7 @@
-<h1>_{MsgHello}
+<div .jumbotron>
+  <h1> trass
+  <p> _{MsgHomeText}
+  <p>
+    <a href=@{CoursesR}     .btn .btn-primary .btn-lg role="button"> _{MsgViewCourses}
+    $if not loggedIn
+      <a href=@{AuthR LoginR} .btn .btn-primary .btn-lg role="button"> _{MsgSignIn}

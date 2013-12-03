@@ -1,5 +1,9 @@
 Hello: Hello
 
+HomeText: The Rigorous Assignment Submission System
+ViewCourses: View courses
+SignIn: Sign in
+
 LoginTitle: Sign in
 LoginGoogle: Login via Google
 LoginGoogleText: If you already have a Google account, just sign in with it.
