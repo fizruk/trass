@@ -3,6 +3,11 @@
     #{name}
   $nothing
     _{MsgNoTitle}
+
+<div .input-group .pull-right .col-lg-5>
+  <input type="file" .form-control>
+  <span .input-group-btn>
+    <a href="" .btn .btn-primary type="button">_{MsgSubmitSolution}
 <p>
   $maybe desc <- crProblemDesc problem
     #{desc}

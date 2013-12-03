@@ -29,6 +29,8 @@ NewCourseSubmit: Start course
 ProblemsText count@Int: This course has #{show count} #{plural count "problem" "problems"}.
 ProblemTitle: Problem title
 
+SubmitSolution: Submit solution
+
 NoDescription: No description.
 NoTitle: No title
 NoProblems: There no problems in this course yet.
