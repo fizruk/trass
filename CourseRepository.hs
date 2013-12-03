@@ -8,7 +8,6 @@ import qualified Data.Text.IO as T
 import System.Directory
 import System.FilePath
 import Text.Markdown
-import Text.Blaze.Html.Renderer.Text (renderHtml)
 
 import Data.Maybe
 
@@ -48,17 +47,6 @@ readCourseRepository name = do
       <*> readProblems path
       <*> pure []
 
-readDesc :: FilePath -> Handler (Maybe Html)
-readDesc path = liftIO $ do
-  contents <- tryReadFile (path </> "desc.md")
-  return $ markdown def . TL.pack . T.unpack <$> contents
-
-readTitle :: FilePath -> Handler (Maybe Text)
-readTitle path = liftIO $ tryReadFile (path </> "title.txt")
-
-tryReadFile :: FilePath -> IO (Maybe Text)
-tryReadFile file = (Just <$> T.readFile file) `mplus` return Nothing
-
 readProblems :: FilePath -> Handler [CourseProblem]
 readProblems path = do
   ps <- liftIO $ getDirectoryContents (path </> "problems") `mplus` pure []
@@ -68,4 +56,18 @@ readProblem :: FilePath -> Handler CourseProblem
 readProblem path = CourseProblem
   <$> readTitle path
   <*> readDesc path
+
+readTitle :: FilePath -> Handler (Maybe Text)
+readTitle path = maybeReadText (path </> "title") [".txt"]
+
+readDesc :: FilePath -> Handler (Maybe Html)
+readDesc path = maybeReadMarkdown (path </> "desc") [".md", ".markdown"]
+
+maybeReadText :: FilePath -> [String] -> Handler (Maybe Text)
+maybeReadText file exts = liftIO $ msum (map (fmap Just . T.readFile . (file <>)) exts) `mplus` return Nothing
+
+maybeReadMarkdown :: FilePath -> [String] -> Handler (Maybe Html)
+maybeReadMarkdown path exts = do
+  contents <- maybeReadText path exts
+  return $ markdown def . TL.pack . T.unpack <$> contents
 
