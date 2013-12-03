@@ -156,6 +156,13 @@ instance YesodAuth App where
     -- Where to send a user after logout
     logoutDest _ = HomeR
 
+    loginHandler = do
+      tp <- getRouteToParent
+      let gmailWidget   = [whamlet| <a href=@{tp forwardUrl}> <img height="40" src=@{StaticR img_sign_in_with_google_png} alt="_{MsgLoginGoogle}"> |]
+          personaWidget = apLogin (authBrowserId def) tp
+      lift $ defaultLayout $ do
+        $(widgetFile "login")
+
     getAuthId creds = runDB $ do
         x <- getBy $ UniqueUser $ credsIdent creds
         case x of

@@ -1,0 +1,11 @@
+<div .center-block .panel .panel-default>
+  <div .panel-heading>
+    _{MsgLoginTitle}
+  <table .table .table-default .table-bordered>
+    <tr .text-center>
+      <td>
+        ^{gmailWidget}
+        <p> _{MsgLoginGoogleText}
+      <td>
+        ^{personaWidget}
+        <p> _{MsgLoginBrowserIdText}

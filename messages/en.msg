@@ -1,5 +1,10 @@
 Hello: Hello
 
+LoginTitle: Sign in
+LoginGoogle: Login via Google
+LoginGoogleText: If you already have a Google account, just sign in with it.
+LoginBrowserIdText: You can sign in using your e-mail via Mozilla Persona.
+
 MenuAdmin: Admin
 MenuCourses: Courses
 MenuProblems: Problems
