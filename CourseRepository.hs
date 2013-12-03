@@ -8,6 +8,7 @@ import qualified Data.Text.IO as T
 import System.Directory
 import System.FilePath
 import Text.Markdown
+import Text.Highlighting.Kate
 
 import Data.Maybe
 import Data.List
@@ -93,5 +94,8 @@ maybeReadText file exts = liftIO $ msum (map (fmap Just . T.readFile . (file <>)
 maybeReadMarkdown :: FilePath -> [String] -> Handler (Maybe Html)
 maybeReadMarkdown path exts = do
   contents <- maybeReadText path exts
-  return $ markdown def . TL.pack . T.unpack <$> contents
+  return $ markdown def {msBlockCodeRenderer = kateBlockCodeRenderer} . TL.pack . T.unpack <$> contents
+
+kateBlockCodeRenderer :: Maybe Text -> (Text, Html) -> Html
+kateBlockCodeRenderer lang (src, _) = formatHtmlBlock defaultFormatOpts $ highlightAs (maybe "text" T.unpack lang) $ T.unpack src
 

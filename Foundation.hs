@@ -101,6 +101,7 @@ instance Yesod App where
             $(combineStylesheets 'StaticR
                 [ css_normalize_css
                 , css_bootstrap_css
+                , css_highlight_css
                 ])
             $(combineScripts 'StaticR
                 [ js_jquery_js
