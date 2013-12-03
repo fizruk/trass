@@ -33,21 +33,39 @@ data CourseProblem = CourseProblem
 
 data CourseSubmission = CourseSubmission
 
-readCourseRepository :: Text -> Handler (Maybe CourseRepository)
-readCourseRepository name = do
+coursePath :: Text -> Handler FilePath
+coursePath name = do
   lang <- fromMaybe "en" <$> lookupSession "_LANG"
-  let path = "courses" </> T.unpack name </> T.unpack lang
+  return $ "courses" </> T.unpack name </> T.unpack lang
+
+courseProblemPath :: Text -> FilePath -> Handler FilePath
+courseProblemPath name prob = do
+  path <- coursePath name
+  return $ path </> "problems" </> prob
+
+withExistingDir :: (MonadIO m) => FilePath -> m a -> m (Maybe a)
+withExistingDir path m = do
   exists <- liftIO $ doesDirectoryExist path
   if not exists
     then return Nothing
-    else fmap Just $ CourseRepository
-      <$> readTitle path
-      <*> pure ""
-      <*> readDesc path
-      <*> pure []
-      <*> pure []
-      <*> readProblems path
-      <*> pure []
+    else Just `liftM` m
+
+readCourseRepository :: Text -> Handler (Maybe CourseRepository)
+readCourseRepository name = do
+  path <- coursePath name
+  withExistingDir path $ CourseRepository
+    <$> readTitle path
+    <*> pure ""
+    <*> readDesc path
+    <*> pure []
+    <*> pure []
+    <*> readProblems path
+    <*> pure []
+
+readCourseRepositoryProblem :: Text -> FilePath -> Handler (Maybe CourseProblem)
+readCourseRepositoryProblem name prob = do
+  path <- courseProblemPath name prob
+  withExistingDir path $ readProblem (path </> "..") prob -- FIXME: fix that .. dirty hack
 
 readProblems :: FilePath -> Handler [CourseProblem]
 readProblems path = do
