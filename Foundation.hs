@@ -86,7 +86,10 @@ instance Yesod App where
         -- value passed to hamletToRepHtml cannot be a widget, this allows
         -- you to use normal widget features in default-layout.
         
-        setUltDestCurrent
+        route <- getCurrentRoute
+        case route of
+          Just (AuthR _) -> return ()
+          _ -> setUltDestCurrent
 
         ma <- maybeAuth
         lang <- lookupSession "_LANG"
