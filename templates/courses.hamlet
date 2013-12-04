@@ -8,7 +8,17 @@ $forall (courseId, cr) <- courses
         $nothing
           _{MsgNoTitle}
     <div .panel-body>
+      <div .pull-right .col-lg-3>
+        $if null (crProblems cr)
+          <div .alert .alert-info> _{MsgNoProblems}
+        $else
+          <ul .list-group>
+            <a href=@{CourseR courseId} .list-group-item>
+              _{MsgCourseProblems}
+              <span .badge> #{length (crProblems cr)}
+
       $maybe desc <- crDescription cr
         #{desc}
       $nothing
         _{MsgNoDescription}
+

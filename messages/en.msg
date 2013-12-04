@@ -1,5 +1,3 @@
-Hello: Hello
-
 HomeText: The Rigorous Assignment Submission System
 ViewCourses: View courses
 SignIn: Sign in
@@ -28,6 +26,7 @@ CourseNo: No.
 CourseName: Course name
 CourseRepo: Course repository
 CourseRepoName: Course repository name
+CourseProblems: Problems
 
 StartNewCourse: New course
 StartNewCourseQuestion: Start a new course? 
