@@ -5,6 +5,8 @@ import Control.Monad
 import qualified Data.Text as T
 import qualified Data.Text.Lazy as TL
 import qualified Data.Text.IO as T
+import Control.Concurrent
+import System.Process
 import System.Directory
 import System.FilePath
 import Text.Markdown
@@ -98,4 +100,9 @@ maybeReadMarkdown path exts = do
 
 kateBlockCodeRenderer :: Maybe Text -> (Text, Html) -> Html
 kateBlockCodeRenderer lang (src, _) = formatHtmlBlock defaultFormatOpts $ highlightAs (maybe "text" T.unpack lang) $ T.unpack src
+
+updateRepositoriesDaemon :: IO ()
+updateRepositoriesDaemon = forever $ do
+  _ <- system "./courses/update-repos >temp.log 2>temp.err"
+  threadDelay 5000000
 

@@ -14,7 +14,7 @@ postAdminNewCourseR :: Handler Html
 postAdminNewCourseR = do
   name <- runInputPost $ ireq textField "courseName"
   repo <- runInputPost $ ireq textField "courseRepo"
-  exitCode <- liftIO . system $ "./courses/new-course-repo " ++ show (unpack repo)
+  exitCode <- liftIO . system $ "./new-course-repo " ++ show (unpack repo)
   case exitCode of
     ExitSuccess -> do
       courseId <- runDB $ insert (Course name repo)

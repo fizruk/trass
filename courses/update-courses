@@ -1,0 +1,10 @@
+#!/bin/sh
+
+cd `dirname $0`
+
+for repo in *
+do
+  cd $repo
+  git pull origin master
+  cd ..
+done
