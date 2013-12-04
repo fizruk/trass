@@ -4,6 +4,10 @@ cd `dirname $0`
 
 repo="$1"
 
+mkdir repos     # bare (central) repositories
+mkdir courses   # cloned master branch  (for rendering course)
+mkdir submits   # cloned submits branch (for submitting)
+
 mkdir repos/$repo && \
   # create a bare repository
   cd repos/$repo && \
