@@ -13,4 +13,4 @@
 /courses CoursesR GET
 /language/#Text LanguageR GET
 /course/#CourseId CourseR GET
-/course/#CourseId/problem/#FilePath CourseProblemR GET
+/course/#CourseId/problem/#FilePath CourseProblemR GET POST
