@@ -11,4 +11,4 @@
       <input .form-control type=text name=courseRepo placeholder="_{MsgCourseRepoName}">
   <div .form-group>
     <div .col-sm-offset-2 .col-sm-10>
-      <input .btn .btn-default type=submit value="_{MsgNewCourseSubmit}">
+      <input .btn .btn-success type=submit value="_{MsgNewCourseSubmit}">
