@@ -33,5 +33,5 @@
     <button .btn .btn-primary type="submit"> _{MsgSubmitSolution}
   <span> &nbsp;
   <div .form-group>
-    <textarea #codeMirrorTextArea .form-control>
+    <textarea name="inPageCodeInput" #codeMirrorTextArea .form-control>
       #{fromMaybe "" (crProblemSnippet problem)}

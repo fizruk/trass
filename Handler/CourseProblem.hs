@@ -31,6 +31,13 @@ postCourseProblemR courseId prob = do
   case p of
     Nothing -> notFound
     Just problem -> do
-      file <- lookupFile "solutionFile"
-      -- TODO: add to submit branch in course repo
-      redirect HomeR
+      textarea <- runInputPost $ iopt textField "inPageCodeInput"
+      case textarea of
+        Nothing -> do
+          file <- lookupFile "solutionFile"
+          -- TODO: add to submit branch in course repo
+          redirect HomeR
+        Just code -> do
+          -- TODO: add to submit branch in course repo
+          redirect HomeR
+
