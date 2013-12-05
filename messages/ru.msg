@@ -37,7 +37,9 @@ NewCourseSubmit: Начать курс
 ProblemsText count@Int: В этом курсе #{show count} #{plural_ru count "задание" "задания" "заданий"}.
 ProblemTitle: Задание
 
+Solution: Решение
 SubmitSolution: Отослать решение
+ProgrammingLanguage: Язык программирования
 
 NoDescription: Описание отсутствует.
 NoTitle: Название отсутствует
