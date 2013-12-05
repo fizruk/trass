@@ -11,4 +11,4 @@ yesod-devel/
 cabal.sandbox.config
 courses/*/
 repos/
-submits/
+submits/*/

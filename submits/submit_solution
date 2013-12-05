@@ -1,0 +1,19 @@
+#!/bin/sh
+
+path=$1
+problem=$2
+
+proj=`pwd`
+
+cd $path
+# try use problem solution checker
+if [ -f "$proj/$problem/check_solution.sh" ]; then
+  $proj/$problem/check_solution.sh
+# or course common solution checker
+elif [ -f "$proj/$problem/../check_solution.sh" ]; then
+  $proj/$problem/../check_solution.sh
+# or just say the solution is successfully submitted
+else
+  echo "CRStatusSubmitted" > status.txt
+fi
+
