@@ -29,9 +29,10 @@ data CourseMaterial   = CourseMaterial
 data CourseExercise   = CourseExercise
 
 data CourseProblem = CourseProblem
-  { crProblemDir    :: FilePath
-  , crProblemName   :: Maybe Text
-  , crProblemDesc   :: Maybe Html
+  { crProblemDir      :: FilePath
+  , crProblemName     :: Maybe Text
+  , crProblemDesc     :: Maybe Html
+  , crProblemSnippet  :: Maybe Text
   }
 
 data CourseSubmission = CourseSubmission
@@ -81,6 +82,7 @@ readProblem parent prob = CourseProblem
   <$> pure prob
   <*> readTitle path
   <*> readDesc path
+  <*> readSnippet path
   where
     path = parent </> prob
 
@@ -89,6 +91,9 @@ readTitle path = maybeReadText (path </> "title") [".txt"]
 
 readDesc :: FilePath -> Handler (Maybe Html)
 readDesc path = maybeReadMarkdown (path </> "desc") [".md", ".markdown"]
+
+readSnippet :: FilePath -> Handler (Maybe Text)
+readSnippet path = maybeReadText (path </> "snippet") [".hs", ".lhs"]
 
 maybeReadText :: FilePath -> [String] -> Handler (Maybe Text)
 maybeReadText file exts = liftIO $ msum (map (fmap Just . T.readFile . (file <>)) exts) `mplus` return Nothing

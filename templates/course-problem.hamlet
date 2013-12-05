@@ -34,3 +34,4 @@
   <span> &nbsp;
   <div .form-group>
     <textarea #codeMirrorTextArea .form-control>
+      #{fromMaybe "" (crProblemSnippet problem)}
