@@ -17,6 +17,7 @@ library
                      Import
                      Model
                      CourseRepository
+                     CodeMirror
                      Settings
                      Settings.StaticFiles
                      Settings.Development
