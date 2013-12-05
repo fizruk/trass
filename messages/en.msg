@@ -37,7 +37,9 @@ NewCourseSubmit: Start course
 ProblemsText count@Int: This course has #{show count} #{plural count "problem" "problems"}.
 ProblemTitle: Problem title
 
+Solution: Solution
 SubmitSolution: Submit solution
+ProgrammingLanguage: Language
 
 NoDescription: No description.
 NoTitle: No title

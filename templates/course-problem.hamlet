@@ -15,3 +15,22 @@
     #{desc}
   $nothing
     _{MsgNoDescription}
+
+<hr>
+
+<form action=@{CourseProblemR courseId prob} method=post role=form>
+  <div .row>
+    <div .input-group .col-lg-1>
+      <span .input-group-addon> _{MsgProgrammingLanguage}
+      <div .input-group-btn>
+        <a href="" type="button" .btn .btn-default .dropdown-toggle data-toggle="dropdown">
+          #{showMode (head languages)}
+          <span .caret>
+        <ul .dropdown-menu pull-right>
+          $forall lang <- languages
+            <li>
+              <a href="#"> #{showMode lang}
+    <button .btn .btn-primary type="submit"> _{MsgSubmitSolution}
+  <span> &nbsp;
+  <div .form-group>
+    <textarea #codeMirrorTextArea .form-control>

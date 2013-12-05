@@ -1,0 +1,1 @@
+var codeMirror = CodeMirror.fromTextArea(codeMirrorTextArea);
