@@ -5,6 +5,7 @@ import Data.List
 import Data.Maybe
 import CourseRepository
 import CodeMirror
+import Yesod.Auth
 
 getCourseProblemR :: CourseId -> FilePath -> Handler Html
 getCourseProblemR courseId prob = do
@@ -31,13 +32,14 @@ postCourseProblemR courseId prob = do
   case p of
     Nothing -> notFound
     Just problem -> do
+      user <- userIdent . entityVal <$> requireAuth
       textarea <- runInputPost $ iopt textField "inPageCodeInput"
       case textarea of
         Nothing -> do
           file <- lookupFile "solutionFile"
           -- TODO: add to submit branch in course repo
-          redirect HomeR
+          redirect AboutR
         Just code -> do
-          -- TODO: add to submit branch in course repo
+          status <- submitSolution repo (crProblemDir problem) user code
           redirect HomeR
 
