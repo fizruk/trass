@@ -123,12 +123,14 @@ updateRepositoriesDaemon = forever $ do
   _ <- system "./courses/update-repos >temp.log 2>temp.err"
   threadDelay 5000000
 
-submitSolution :: FilePath -> Text -> Text -> Handler CourseSubmissionStatus
-submitSolution problemPath user code = do
-  let submissionPath = problemPath </> T.unpack user
+submitSolution :: Text -> FilePath -> Text -> Text -> Handler CourseSubmissionStatus
+submitSolution repo prob user code = do
+  let submissionPath = "submits" </> T.unpack repo </> prob </> T.unpack user
+  coursePath <- courseProblemPath repo prob
   _ <- liftIO $ do
+    createDirectoryIfMissing True submissionPath
     T.writeFile (submissionPath </> "submission") code
-    system $ "./submits/submit_solution " ++ submissionPath
+    system $ "./submits/submit_solution " ++ submissionPath ++ " " ++ coursePath
   ms <- maybeReadText (submissionPath </> "status") [".txt"]
   case ms of
     Nothing -> return $ CRStatusFailed (Just "checker failed")
