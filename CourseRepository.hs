@@ -36,6 +36,18 @@ data CourseProblem = CourseProblem
   }
 
 data CourseSubmission = CourseSubmission
+  { crSubmissionFile    :: FilePath
+  , crSubmissionStatus  :: CourseSubmissionStatus
+  }
+
+data CourseSubmissionStatus
+  = CRStatusSubmitted
+  | CRStatusStarted
+  | CRStatusInProgress (Maybe Text)
+  | CRStatusBlocked (Maybe Text)
+  | CRStatusFailed (Maybe Text)
+  | CRStatusPassed
+  deriving (Show, Read)
 
 coursePath :: Text -> Handler FilePath
 coursePath name = do
@@ -110,4 +122,15 @@ updateRepositoriesDaemon :: IO ()
 updateRepositoriesDaemon = forever $ do
   _ <- system "./courses/update-repos >temp.log 2>temp.err"
   threadDelay 5000000
+
+submitSolution :: FilePath -> Text -> Text -> Handler CourseSubmissionStatus
+submitSolution problemPath user code = do
+  let submissionPath = problemPath </> T.unpack user
+  _ <- liftIO $ do
+    T.writeFile (submissionPath </> "submission") code
+    system $ "./submits/submit_solution " ++ submissionPath
+  ms <- maybeReadText (submissionPath </> "status") [".txt"]
+  case ms of
+    Nothing -> return $ CRStatusFailed (Just "checker failed")
+    Just t  -> return . read $ T.unpack t
 
