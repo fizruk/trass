@@ -23,13 +23,17 @@
     <div .input-group .col-lg-1>
       <span .input-group-addon> _{MsgProgrammingLanguage}
       <div .input-group-btn>
-        <a href="" type="button" .btn .btn-default .dropdown-toggle data-toggle="dropdown">
-          #{showMode (head languages)}
-          <span .caret>
-        <ul .dropdown-menu pull-right>
-          $forall lang <- languages
-            <li>
-              <a href="#"> #{showMode lang}
+        $if null (tail languages)
+          <button type="button" .btn .btn-default>
+            #{showMode (head languages)}
+        $else
+          <button type="button" .btn .btn-default .dropdown-toggle data-toggle="dropdown">
+            #{showMode (head languages)}
+            <span .caret>
+          <ul .dropdown-menu pull-right>
+            $forall lang <- languages
+              <li>
+                <a href="#"> #{showMode lang}
     <button .btn .btn-primary type="submit"> _{MsgSubmitSolution}
   <span> &nbsp;
   <div .form-group>
