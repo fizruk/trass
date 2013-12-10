@@ -2,11 +2,12 @@
 $forall (courseId, cr) <- courses
   <div .panel .panel-default>
     <div .panel-heading>
-      <a href=@{CourseR courseId}>
-        $maybe name <- crName cr
-          #{name}
-        $nothing
-          _{MsgNoTitle}
+      <h3 .panel-title>
+        <a href=@{CourseR courseId}>
+          $maybe name <- crName cr
+            #{name}
+          $nothing
+            _{MsgNoTitle}
     <div .panel-body>
       <div .pull-right .col-lg-3>
         $if null (crProblems cr)
