@@ -41,6 +41,9 @@ Solution: Solution
 SubmitSolution: Submit solution
 ProgrammingLanguage: Language
 
+SubmitsTitle: Submits
+SubmitStatus: Status
+
 NoDescription: No description.
 NoTitle: No title
 NoProblems: There no problems in this course yet.

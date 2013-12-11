@@ -1,0 +1,7 @@
+<h1> _{MsgSubmitsTitle}
+<div .panel .panel-default>
+  <table .table>
+    <thead>
+      <th> _{MsgCoursesTitle}
+      <th> _{MsgProblemTitle}
+      <th> _{MsgSubmitStatus}
