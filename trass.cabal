@@ -31,6 +31,7 @@ library
                      Handler.Language
                      Handler.Course
                      Handler.CourseProblem
+                     Handler.Submits
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT
