@@ -1,6 +1,7 @@
 module CourseRepository where
 
 import Import
+import Control.Applicative
 import Control.Monad
 import qualified Data.Text as T
 import qualified Data.Text.Lazy as TL
@@ -83,13 +84,13 @@ readCourseRepositoryProblem name prob = do
   path <- courseProblemPath name prob
   withExistingDir path $ readProblem (path </> "..") prob -- FIXME: fix that .. dirty hack
 
-readProblems :: FilePath -> Handler [CourseProblem]
+readProblems :: (MonadIO m, Applicative m) => FilePath -> m [CourseProblem]
 readProblems path = do
   ps <- liftIO $ getDirectoryContents (path </> "problems") `mplus` pure []
   let ps' = filter (not . isPrefixOf ".") ps
   mapM (readProblem (path </> "problems")) ps'
 
-readProblem :: FilePath -> FilePath -> Handler CourseProblem
+readProblem :: (MonadIO m, Applicative m) => FilePath -> FilePath -> m CourseProblem
 readProblem parent prob = CourseProblem
   <$> pure prob
   <*> readTitle path
@@ -98,19 +99,19 @@ readProblem parent prob = CourseProblem
   where
     path = parent </> prob
 
-readTitle :: FilePath -> Handler (Maybe Text)
+readTitle :: MonadIO m => FilePath -> m (Maybe Text)
 readTitle path = maybeReadText (path </> "title") [".txt"]
 
-readDesc :: FilePath -> Handler (Maybe Html)
+readDesc :: MonadIO m => FilePath -> m (Maybe Html)
 readDesc path = maybeReadMarkdown (path </> "desc") [".md", ".markdown"]
 
-readSnippet :: FilePath -> Handler (Maybe Text)
+readSnippet :: MonadIO m => FilePath -> m (Maybe Text)
 readSnippet path = maybeReadText (path </> "snippet") [""]
 
-maybeReadText :: FilePath -> [String] -> Handler (Maybe Text)
+maybeReadText :: MonadIO m => FilePath -> [String] -> m (Maybe Text)
 maybeReadText file exts = liftIO $ msum (map (fmap Just . T.readFile . (file <>)) exts) `mplus` return Nothing
 
-maybeReadMarkdown :: FilePath -> [String] -> Handler (Maybe Html)
+maybeReadMarkdown :: MonadIO m => FilePath -> [String] -> m (Maybe Html)
 maybeReadMarkdown path exts = do
   contents <- maybeReadText path exts
   return $ markdown def {msBlockCodeRenderer = kateBlockCodeRenderer} . TL.pack . T.unpack <$> contents
