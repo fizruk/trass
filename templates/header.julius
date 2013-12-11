@@ -1,0 +1,4 @@
+$("#message")
+  .addClass('alert alert-success alert-dismissable')
+  .prepend('<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>')
+
