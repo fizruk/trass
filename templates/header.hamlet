@@ -14,7 +14,7 @@
       <li>
         <a href="">_{MsgMenuProblems}
       <li>
-        <a href="">_{MsgMenuSubmits}
+        <a href=@{SubmitsR}>_{MsgMenuSubmits}
       <li>
         <a href=@{AboutR}>_{MsgMenuAbout}
       <li .dropdown>
