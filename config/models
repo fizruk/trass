@@ -14,4 +14,9 @@ Course
   repo  Text
   UniqueCourse name
 
+Submission
+  user    UserId
+  course  CourseId
+  problem FilePath
+
  -- By default this file is used in Model.hs (which is imported by Foundation.hs)

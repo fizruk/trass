@@ -26,13 +26,13 @@ getCourseProblemR courseId prob = do
 
 postCourseProblemR :: CourseId -> FilePath -> Handler Html
 postCourseProblemR courseId prob = do
+  userId <- requireAuthId
   c <- runDB $ get404 courseId
   let repo = courseRepo c
   p <- readCourseRepositoryProblem repo prob
   case p of
     Nothing -> notFound
     Just problem -> do
-      user <- userIdent . entityVal <$> requireAuth
       textarea <- runInputPost $ iopt textField "inPageCodeInput"
       case textarea of
         Nothing -> do
@@ -40,6 +40,6 @@ postCourseProblemR courseId prob = do
           -- TODO: add to submit branch in course repo
           redirect AboutR
         Just code -> do
-          status <- submitSolution repo (crProblemDir problem) user code
+          status <- submitSolution userId courseId (crProblemDir problem) repo code
           redirect HomeR
 

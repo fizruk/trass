@@ -14,7 +14,7 @@ import Text.Markdown
 import Text.Highlighting.Kate
 
 import Data.Maybe
-import Data.List
+import Data.List (isPrefixOf)
 
 data CourseRepository = CourseRepository
   { crName        :: Maybe Text
@@ -124,9 +124,10 @@ updateRepositoriesDaemon = forever $ do
   _ <- system "./courses/update-repos >temp.log 2>temp.err"
   threadDelay 5000000
 
-submitSolution :: Text -> FilePath -> Text -> Text -> Handler CourseSubmissionStatus
-submitSolution repo prob user code = do
-  let submissionPath = "submits" </> T.unpack repo </> prob </> T.unpack user
+submitSolution :: UserId -> CourseId -> FilePath -> Text -> Text -> Handler CourseSubmissionStatus
+submitSolution userId courseId prob repo code = do
+  submissionId <- runDB $ insert (Submission userId courseId prob)
+  let submissionPath = "submits" </> T.unpack repo </> prob </> T.unpack (toPathPiece userId) </> T.unpack (toPathPiece submissionId)
   coursePath <- courseProblemPath repo prob
   _ <- liftIO $ do
     createDirectoryIfMissing True submissionPath
