@@ -5,3 +5,8 @@
       <th> _{MsgCoursesTitle}
       <th> _{MsgProblemTitle}
       <th> _{MsgSubmitStatus}
+    $forall submit <- submits
+      <tr>
+        <td> #{show (submissionCourse submit)}
+        <td> problem
+        <td> status
