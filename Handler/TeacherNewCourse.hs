@@ -2,6 +2,8 @@ module Handler.TeacherNewCourse where
 
 import Import
 import Yesod.Auth
+import System.Process
+import System.Exit
 
 getTeacherNewCourseR :: Handler Html
 getTeacherNewCourseR = do
@@ -13,5 +15,10 @@ postTeacherNewCourseR :: Handler Html
 postTeacherNewCourseR = do
   userId <- requireAuthId
   name   <- runInputPost $ ireq textField "course-repo"
-  courseId <- runDB $ insert (Course userId name)
-  redirect TeacherCoursesR
+  exitCode <- liftIO . system $ "./courses/new_course.sh " ++ show name
+  case exitCode of
+    ExitSuccess -> do
+      courseId <- runDB $ insert (Course userId name)
+      redirect TeacherCoursesR
+    _ -> do
+      error "Failed to create new course."
