@@ -14,6 +14,6 @@ getCoursesR = do
     desc  <- liftIO $ csDescription cr
     sections <- liftIO $ csSubsections cr
     problems <- liftIO $ csProblems cr
-    return (title, desc, sections, problems)
+    return (courseId, title, desc, sections, problems)
   defaultLayout $ do
     $(widgetFile "courses")

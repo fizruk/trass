@@ -19,12 +19,13 @@ $else
         <th> _{MsgCourseRepo}
         <th> _{MsgCourseAuthor}
       <tbody>
-        $forall (mtitle, repo, author) <- courses
+        $forall (courseId, mtitle, repo, author) <- courses
           <tr>
             <td>
-              $maybe title <- mtitle
-                #{title}
-              $nothing
-                _{MsgCourseNoTitle}
+              <a href=@{CourseR courseId}>
+                $maybe title <- mtitle
+                  #{title}
+                $nothing
+                  _{MsgCourseNoTitle}
             <td> #{repo}
             <td> #{author}

@@ -6,7 +6,7 @@
   <div .collapse .navbar-collapse #trass-navbar-collapse>
     <ul .nav .navbar-nav>
       <li>
-        <a href="#"> _{MsgNavCourses}
+        <a href=@{CoursesR}> _{MsgNavCourses}
       <li>
         <a href="#"> _{MsgNavAssignments}
       <li>

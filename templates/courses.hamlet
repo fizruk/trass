@@ -5,14 +5,15 @@ $if null courses
     <div .panel-body>
       <p> _{MsgNoCourses}
 $else
-  $forall (mtitle, mdesc, sections, problems) <- courses
+  $forall (courseId, mtitle, mdesc, sections, problems) <- courses
     <div .panel .panel-default>
       <div .panel-heading>
         <h3 .panel-title>
-          $maybe title <- mtitle
-            #{title}
-          $nothing
-            _{MsgCourseNoTitle}
+          <a href=@{CourseR courseId}>
+            $maybe title <- mtitle
+              #{title}
+            $nothing
+              _{MsgCourseNoTitle}
       <div .panel-body>
         $maybe desc <- mdesc
           #{desc}

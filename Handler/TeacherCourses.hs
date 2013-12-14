@@ -11,7 +11,7 @@ getTeacherCoursesR = do
     let name = courseName course
     cr <- courseContents name
     title <- liftIO $ csTitle cr
-    return (title, name, "author" :: Text)
+    return (courseId, title, name, "author" :: Text)
   defaultLayout $ do
     setTitle "Teacher's corner: courses"
     $(widgetFile "teacher-courses")
