@@ -11,3 +11,4 @@
 /course/#CourseId CourseR GET
 /courses CoursesR GET
 /course/#CourseId/section/*Texts CourseSectionR GET
+/course/#CourseId/problem/*Texts CourseProblemR GET
