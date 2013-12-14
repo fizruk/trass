@@ -3,7 +3,32 @@
     #{title}
   $nothing
     _{MsgCourseNoTitle}
-$maybe desc <- mdesc
-  #{desc}
-$nothing
-  _{MsgCourseNoDescription}
+<div .row>
+  <div .col-lg-8>
+    $maybe desc <- mdesc
+      #{desc}
+    $nothing
+      _{MsgCourseNoDescription}
+  <div .col-lg-4>
+    $if null sections && null problems
+      <div .alert .alert-info>
+        _{MsgCourseIsEmpty}
+    $else
+      $if not (null sections)
+        <div .panel .panel-default>
+          <div .panel-heading>
+            <h3 .panel-title>
+              _{MsgSections}
+              <span .badge .pull-right> #{length sections}
+          <div .list-group>
+            $forall section <- sections
+              <a href="#" .list-group-item> section
+      $if not (null problems)
+        <div .panel .panel-default>
+          <div .panel-heading>
+            <h3 .panel-title>
+              _{MsgProblems}
+              <span .badge .pull-right> #{length problems}
+          <div .list-group>
+            $forall problem <- problems
+              <a href="#" .list-group-item> problem

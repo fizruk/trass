@@ -30,3 +30,6 @@ CourseNoDescription: No description.
 CourseRepo: Repository name
 CourseAuthor: Author
 ViewCourse: View course
+CourseIsEmpty: This course is empty.
+Sections: Sections
+Problems: Problems
