@@ -11,6 +11,8 @@ import qualified Data.Text as T
 import qualified Data.Text.IO as T
 import qualified Data.Text.Lazy.IO as TL
 
+import qualified Data.Yaml.Config as Y
+
 import Text.Markdown
 import Text.Highlighting.Kate
 
@@ -33,6 +35,7 @@ data CourseProblem = CourseProblem
   , cpTitle       :: IO (Maybe Text)
   , cpDescription :: IO (Maybe Html)
   , cpSnippet     :: IO (Maybe Text)
+  , cpConfig      :: IO (Maybe Y.Config)
   }
 
 courseContents404 :: Text -> Handler CourseRepository
@@ -90,6 +93,7 @@ problem = CourseProblem
   <*> readTitle
   <*> readDesc
   <*> readSnippet
+  <*> readConfig
 
 readTitle :: FilePath -> IO (Maybe Text)
 readTitle path = tryExts [".txt"] (path </> "title") T.readFile
@@ -108,6 +112,9 @@ readSubsections path = map section . map (path </>) . sort . filter isSectionDir
   where
     isSectionDir (x:_) = isDigit x
     isSectionDir _ = False
+
+readConfig :: FilePath -> IO (Maybe Y.Config)
+readConfig path = tryExts ["yml", "yaml"] (path </> "trass") Y.load
 
 readProblems :: FilePath -> IO [CourseProblem]
 readProblems path = map problem . map (path </>) . sort . filter isProblemDir <$> getDirectoryContents path

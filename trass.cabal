@@ -81,6 +81,7 @@ library
                  , highlighting-kate             >= 0.5
                  , filepath                      >= 1.3
                  , process                       >= 1.1
+                 , yaml-config                   >= 0.2
 
 executable         trass
     if flag(library-only)
