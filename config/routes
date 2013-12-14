@@ -7,3 +7,4 @@
 / HomeR GET
 /teacher TeacherCornerR GET
 /teacher/courses/ TeacherCoursesR GET
+/teacher/new-course TeacherNewCourseR GET POST
