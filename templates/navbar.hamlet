@@ -11,15 +11,17 @@
         <a href="#"> _{MsgNavAssignments}
       <li>
         <a href="#"> _{MsgNavSubmits}
-    <p .navbar-text .navbar-right>
-      $maybe auth <- ma
+    $maybe Entity _ user <- ma
+      <p .navbar-text .navbar-right>
         _{MsgNavSignedInAs}
-        <a href="#"> #{userIdent (entityVal auth)}
+        <a href="#"> #{userIdent user}
         (
         <a href=@{AuthR LogoutR}> _{MsgNavSignOut}
         )
-      $nothing
+      $if isTeacher user
+        <ul .nav .navbar-nav .navbar-right>
+          <li>
+            <a href="#"> _{MsgNavTeacherCorner}
+    $nothing
+      <p .navbar-text .navbar-right>
         <a href=@{AuthR LoginR}> _{MsgNavSignIn}
-    <ul .nav .navbar-nav .navbar-right>
-      <li>
-        <a href="#"> _{MsgNavTeacherCorner}
