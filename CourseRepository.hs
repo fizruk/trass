@@ -42,16 +42,28 @@ courseContents :: Text -> Handler CourseRepository
 courseContents name = sectionContents name []
 
 sectionContents404 :: Text -> [Text] -> Handler CourseSection
-sectionContents404 course spath = do
-  s <- sectionContents course spath
-  exists <- liftIO $ doesDirectoryExist (csPath s)
-  if exists then return s else notFound
+sectionContents404 course path = section <$> getCoursePath404 course path
 
 sectionContents :: Text -> [Text] -> Handler CourseSection
-sectionContents course spath = do
+sectionContents course path = section <$> getCoursePath course path
+
+problemContents404 :: Text -> [Text] -> Handler CourseProblem
+problemContents404 course path = problem <$> getCoursePath404 course path
+
+problemContents :: Text -> [Text] -> Handler CourseProblem
+problemContents course path = problem <$> getCoursePath course path
+
+getCoursePath404 :: Text -> [Text] -> Handler FilePath
+getCoursePath404 course tpath = do
+  path <- getCoursePath course tpath
+  exists <- liftIO $ doesDirectoryExist path
+  if exists then return path else notFound
+
+getCoursePath :: Text -> [Text] -> Handler FilePath
+getCoursePath course tpath = do
   lang <- fromMaybe "en" <$> lookupSession "_LANG"
-  let sectionPath = System.FilePath.joinPath $ map T.unpack (course : lang : spath)
-  return . section $ "courses" </> "contents" </> sectionPath
+  let path = System.FilePath.joinPath $ map T.unpack (course : lang : tpath)
+  return $ "courses" </> "contents" </> path
 
 tryExts :: [FilePath] -> FilePath -> (FilePath -> IO a) -> IO (Maybe a)
 tryExts [] _ _ = return Nothing
