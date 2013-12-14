@@ -21,8 +21,8 @@
               _{MsgSections}
               <span .badge .pull-right> #{length sections}
           <div .list-group>
-            $forall (mtitle) <- sections
-              <a href="#" .list-group-item>
+            $forall (path, mtitle) <- sections
+              <a href=@{CourseSectionR courseId (spath ++ path)} .list-group-item>
                 $maybe title <- mtitle
                   #{title}
                 $nothing

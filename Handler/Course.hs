@@ -3,9 +3,13 @@ module Handler.Course where
 import Import
 import CourseRepository
 import Control.Monad
+import qualified Data.Text as T
+import System.FilePath
+import Data.List (last)
 
 getCourseR :: CourseId -> Handler Html
 getCourseR courseId = do
+  let spath = []
   course <- runDB $ get404 courseId
   let name = courseName course
   cr <- courseContents name
@@ -13,11 +17,12 @@ getCourseR courseId = do
   mdesc  <- liftIO $ csDescription cr
   ss     <- liftIO $ csSubsections cr
   ps     <- liftIO $ csProblems cr
-  sections <- forM ss $ \section -> do
-    mtitle <- liftIO $ csTitle section
-    return (mtitle)
-  problems <- forM ps $ \problem -> do
-    mtitle <- liftIO $ cpTitle problem
-    return (mtitle)
+  sections <- forM ss $ \s -> do
+    let path = T.pack . last . splitPath $ csPath s
+    title <- liftIO $ csTitle s
+    return ([path], title)
+  problems <- forM ps $ \p -> do
+    title <- liftIO $ cpTitle p
+    return (title)
   defaultLayout $ do
     $(widgetFile "section")
