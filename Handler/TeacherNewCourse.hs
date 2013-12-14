@@ -1,6 +1,7 @@
 module Handler.TeacherNewCourse where
 
 import Import
+import Yesod.Auth
 
 getTeacherNewCourseR :: Handler Html
 getTeacherNewCourseR = do
@@ -9,4 +10,8 @@ getTeacherNewCourseR = do
     $(widgetFile "teacher-new-course")
 
 postTeacherNewCourseR :: Handler Html
-postTeacherNewCourseR = error "Not yet implemented: postTeacherNewCourseR"
+postTeacherNewCourseR = do
+  userId <- requireAuthId
+  name   <- runInputPost $ ireq textField "course-repo"
+  courseId <- runDB $ insert (Course userId name)
+  redirect TeacherCoursesR

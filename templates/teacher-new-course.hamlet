@@ -8,6 +8,6 @@
       <div .form-group>
         <label .col-sm-2 .control-label> _{MsgCourseRepo}
         <div .col-sm-4>
-          <input type="text" .form-control placeholder="repository-name">
+          <input type="text" .form-control placeholder="repository-name" name="course-repo">
           <span .help-block> Repository name must be unique for each course.
       <button type="submit" .btn .btn-success> _{MsgTeacherStartCourse}
