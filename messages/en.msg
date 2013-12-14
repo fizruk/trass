@@ -25,7 +25,8 @@ NoCourses: There are no courses yet.
 
 CourseTitle: Course title
 CourseNoTitle: No title
+CourseNoSummary: No summary.
 CourseNoDescription: No description.
 CourseRepo: Repository name
 CourseAuthor: Author
-
+ViewCourse: View course
