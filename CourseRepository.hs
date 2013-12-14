@@ -1,7 +1,8 @@
+{-# LANGUAGE ScopedTypeVariables #-}
 module CourseRepository where
 
 import Import
-import Control.Monad
+import qualified Control.Exception as E
 
 import Data.Char
 import Data.List (sort)
@@ -70,7 +71,7 @@ getCoursePath course tpath = do
 
 tryExts :: [FilePath] -> FilePath -> (FilePath -> IO a) -> IO (Maybe a)
 tryExts [] _ _ = return Nothing
-tryExts (ext:exts) path act = (Just <$> act (path ++ ext)) `mplus` tryExts exts path act
+tryExts (ext:exts) path act = (Just <$> act (path ++ ext)) `E.catch` \(_ :: E.SomeException) -> tryExts exts path act
 
 readMarkdown :: FilePath -> IO Html
 readMarkdown path = markdown def {msBlockCodeRenderer = kateBlockCodeRenderer} <$> TL.readFile path
@@ -114,7 +115,7 @@ readSubsections path = map section . map (path </>) . sort . filter isSectionDir
     isSectionDir _ = False
 
 readConfig :: FilePath -> IO (Maybe Y.Config)
-readConfig path = tryExts ["yml", "yaml"] (path </> "trass") Y.load
+readConfig path = tryExts [".yml", ".yaml"] (path </> "trass") Y.load
 
 readProblems :: FilePath -> IO [CourseProblem]
 readProblems path = map problem . map (path </>) . sort . filter isProblemDir <$> getDirectoryContents path
