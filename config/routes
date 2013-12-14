@@ -10,3 +10,4 @@
 /teacher/new-course TeacherNewCourseR GET POST
 /course/#CourseId CourseR GET
 /courses CoursesR GET
+/course/#CourseId/section/*Texts CourseSectionR GET
