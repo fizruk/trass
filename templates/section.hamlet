@@ -34,8 +34,8 @@
               _{MsgProblems}
               <span .badge .pull-right> #{length problems}
           <div .list-group>
-            $forall (mtitle) <- problems
-              <a href="#" .list-group-item>
+            $forall (path, mtitle) <- problems
+              <a href=@{CourseProblemR courseId (spath ++ path)} .list-group-item>
                 $maybe title <- mtitle
                   #{title}
                 $nothing

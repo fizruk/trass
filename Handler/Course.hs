@@ -22,7 +22,8 @@ getCourseR courseId = do
     title <- liftIO $ csTitle s
     return ([path], title)
   problems <- forM ps $ \p -> do
+    let path = T.pack . last . splitPath $ cpPath p
     title <- liftIO $ cpTitle p
-    return (title)
+    return ([path], title)
   defaultLayout $ do
     $(widgetFile "section")
