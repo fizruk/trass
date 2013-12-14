@@ -6,20 +6,20 @@
   <div .collapse .navbar-collapse #trass-navbar-collapse>
     <ul .nav .navbar-nav>
       <li>
-        <a href="#"> Courses
+        <a href="#"> _{MsgNavCourses}
       <li>
-        <a href="#"> Assignments
+        <a href="#"> _{MsgNavAssignments}
       <li>
-        <a href="#"> Submits
+        <a href="#"> _{MsgNavSubmits}
     <p .navbar-text .navbar-right>
       $maybe auth <- ma
-        Signed in as
+        _{MsgNavSignedInAs}
         <a href="#"> #{userIdent (entityVal auth)}
         (
-        <a href=@{AuthR LogoutR}> Sign out
+        <a href=@{AuthR LogoutR}> _{MsgNavSignOut}
         )
       $nothing
-        <a href=@{AuthR LoginR}> Sign in
+        <a href=@{AuthR LoginR}> _{MsgNavSignIn}
     <ul .nav .navbar-nav .navbar-right>
       <li>
-        <a href="#"> Teacher's corner
+        <a href="#"> _{MsgNavTeacherCorner}
