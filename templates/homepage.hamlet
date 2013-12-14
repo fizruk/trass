@@ -1,7 +1,7 @@
 <div .jumbotron>
   <h1>
     Trass
-    <small> The rigorous assignment submission system
-  <p> This system provides an automated approach to assignment submission.
+    <small> _{MsgTrassDefinition}
+  <p> _{MsgTrassText}
   <p>
-    <a .btn .btn-primary .btn-lg role="button"> View courses
+    <a .btn .btn-primary .btn-lg role="button"> _{MsgViewCourses}
