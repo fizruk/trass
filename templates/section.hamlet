@@ -1,0 +1,9 @@
+<h1>
+  $maybe title <- mtitle
+    #{title}
+  $nothing
+    _{MsgCourseNoTitle}
+$maybe desc <- mdesc
+  #{desc}
+$nothing
+  _{MsgCourseNoDescription}
