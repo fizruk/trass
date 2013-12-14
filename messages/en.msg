@@ -11,3 +11,13 @@ NavSignIn: Sign in
 NavSignOut: Sign out
 NavSignedInAs: Signed in as
 
+TeacherCornerSubheader: (teacher's corner)
+
+TeacherCoursesHeader: Courses
+TeacherStartNewCourse: Start a new course
+TeacherNoCourses: There are no courses yet.
+TeacherSomeCourses count@Int: There are #{show count} courses.
+
+CourseTitle: Course title
+CourseRepo: Repository name
+CourseAuthor: Author
