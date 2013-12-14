@@ -22,6 +22,7 @@ type CourseRepository = CourseSection
 data CourseSection = CourseSection
   { csPath        :: FilePath
   , csTitle       :: IO (Maybe Text)
+  , csSummary     :: IO (Maybe Html)
   , csDescription :: IO (Maybe Html)
   , csSubsections :: IO [CourseSection]
   , csProblems    :: IO [CourseProblem]
@@ -53,6 +54,7 @@ section :: FilePath -> CourseSection
 section = CourseSection
   <$> id
   <*> readTitle
+  <*> readSummary
   <*> readDesc
   <*> readSubsections
   <*> readProblems
@@ -69,6 +71,9 @@ readTitle path = tryExts [".txt"] (path </> "title") T.readFile
 
 readSnippet :: FilePath -> IO (Maybe Text)
 readSnippet path = tryExts [".hs"] (path </> "snippet") T.readFile
+
+readSummary :: FilePath -> IO (Maybe Html)
+readSummary path = tryExts [".md", ".markdown"] (path </> "summary") readMarkdown
 
 readDesc :: FilePath -> IO (Maybe Html)
 readDesc path = tryExts [".md", ".markdown"] (path </> "desc") readMarkdown
