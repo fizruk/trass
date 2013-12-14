@@ -21,7 +21,7 @@
       $if isTeacher user
         <ul .nav .navbar-nav .navbar-right>
           <li>
-            <a href="#"> _{MsgNavTeacherCorner}
+            <a href=@{TeacherCornerR}> _{MsgNavTeacherCorner}
     $nothing
       <p .navbar-text .navbar-right>
         <a href=@{AuthR LoginR}> _{MsgNavSignIn}
