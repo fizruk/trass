@@ -1,0 +1,13 @@
+<h1>
+  _{MsgTeacherStartingNewCourse}
+  <small> _{MsgTeacherCornerSubheader}
+
+<div .panel .panel-default>
+  <div .panel-body>
+    <form .form-horizontal role="form" action=@{TeacherNewCourseR} method="post">
+      <div .form-group>
+        <label .col-sm-2 .control-label> _{MsgCourseRepo}
+        <div .col-sm-4>
+          <input type="text" .form-control placeholder="repository-name">
+          <span .help-block> Repository name must be unique for each course.
+      <button type="submit" .btn .btn-success> _{MsgTeacherStartCourse}

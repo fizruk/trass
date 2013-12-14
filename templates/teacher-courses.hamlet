@@ -6,12 +6,12 @@ $if null courses
   <div .panel .panel-default>
     <div .panel-body>
       <p> _{MsgTeacherNoCourses}
-        <a .pull-right .btn .btn-success href="#"> _{MsgTeacherStartNewCourse}
+        <a .pull-right .btn .btn-success href=@{TeacherNewCourseR}> _{MsgTeacherStartNewCourse}
 $else
   <div .panel .panel-default>
     <div .panel-body>
       <p> _{MsgTeacherSomeCourses (length courses)}
-        <a .pull-right .btn .btn-success href="#"> _{MsgTeacherStartNewCourse}
+        <a .pull-right .btn .btn-success href=@{TeacherNewCourseR}> _{MsgTeacherStartNewCourse}
 
     <table .table>
       <thead>

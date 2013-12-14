@@ -15,6 +15,8 @@ TeacherCornerSubheader: (teacher's corner)
 
 TeacherCoursesHeader: Courses
 TeacherStartNewCourse: Start a new course
+TeacherStartingNewCourse: Starting a new course
+TeacherStartCourse: Start course
 TeacherNoCourses: There are no courses yet.
 TeacherSomeCourses count@Int: There are #{show count} courses.
 
