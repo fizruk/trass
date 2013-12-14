@@ -5,6 +5,7 @@ import Control.Monad
 
 import Data.Char
 import Data.List (sort)
+import Data.Maybe
 
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
@@ -33,8 +34,10 @@ data CourseProblem = CourseProblem
   , cpSnippet     :: IO (Maybe Text)
   }
 
-csContentsPath :: FilePath
-csContentsPath = "courses/contents"
+courseContents :: Text -> Handler CourseRepository
+courseContents name = do
+  lang <- fromMaybe "en" <$> lookupSession "_LANG"
+  return . section $ "courses" </> "contents" </> T.unpack name </> T.unpack lang
 
 tryExts :: [FilePath] -> FilePath -> (FilePath -> IO a) -> IO (Maybe a)
 tryExts [] _ _ = return Nothing
