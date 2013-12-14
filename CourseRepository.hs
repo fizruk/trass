@@ -33,6 +33,9 @@ data CourseProblem = CourseProblem
   , cpSnippet     :: IO (Maybe Text)
   }
 
+csContentsPath :: FilePath
+csContentsPath = "courses/contents"
+
 tryExts :: [FilePath] -> FilePath -> (FilePath -> IO a) -> IO (Maybe a)
 tryExts [] _ _ = return Nothing
 tryExts (ext:exts) path act = (Just <$> act (path ++ ext)) `mplus` tryExts exts path act

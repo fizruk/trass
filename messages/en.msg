@@ -21,5 +21,6 @@ TeacherNoCourses: There are no courses yet.
 TeacherSomeCourses count@Int: There are #{show count} courses.
 
 CourseTitle: Course title
+CourseNoTitle: No title
 CourseRepo: Repository name
 CourseAuthor: Author
