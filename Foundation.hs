@@ -68,10 +68,13 @@ instance Yesod App where
         -- value passed to hamletToRepHtml cannot be a widget, this allows
         -- you to use normal widget features in default-layout.
 
+        let navbarWidget = $(widgetFile "navbar")
+
         pc <- widgetToPageContent $ do
             $(combineStylesheets 'StaticR
                 [ css_normalize_css
                 , css_bootstrap_css
+                , css_bootstrap_theme_css
                 ])
             $(combineScripts 'StaticR
                 [ js_jquery_js
