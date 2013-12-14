@@ -6,3 +6,4 @@
 
 / HomeR GET
 /teacher TeacherCornerR GET
+/teacher/courses/ TeacherCoursesR GET
