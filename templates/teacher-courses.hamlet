@@ -19,4 +19,8 @@ $else
         <th> _{MsgCourseRepo}
         <th> _{MsgCourseAuthor}
       <tbody>
-        
+        $forall (title, repo, author) <- courses
+          <tr>
+            <td> #{title}
+            <td> #{repo}
+            <td> #{author}
