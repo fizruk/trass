@@ -1,0 +1,13 @@
+<h1>
+  $maybe title <- mtitle
+    #{title}
+  $nothing
+    _{MsgCourseNoTitle}
+<div .row>
+  <div .col-lg-8>
+    $maybe desc <- mdesc
+      #{desc}
+    $nothing
+      _{MsgCourseNoDescription}
+  <div .col-lg-4>
+    
