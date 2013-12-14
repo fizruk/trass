@@ -12,7 +12,7 @@ getCourseR courseId = do
   let spath = []
   course <- runDB $ get404 courseId
   let name = courseName course
-  cr <- courseContents name
+  cr <- courseContents404 name
   mtitle <- liftIO $ csTitle cr
   mdesc  <- liftIO $ csDescription cr
   ss     <- liftIO $ csSubsections cr

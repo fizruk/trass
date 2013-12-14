@@ -35,10 +35,23 @@ data CourseProblem = CourseProblem
   , cpSnippet     :: IO (Maybe Text)
   }
 
+courseContents404 :: Text -> Handler CourseRepository
+courseContents404 name = sectionContents404 name []
+
 courseContents :: Text -> Handler CourseRepository
-courseContents name = do
+courseContents name = sectionContents name []
+
+sectionContents404 :: Text -> [Text] -> Handler CourseSection
+sectionContents404 course spath = do
+  s <- sectionContents course spath
+  exists <- liftIO $ doesDirectoryExist (csPath s)
+  if exists then return s else notFound
+
+sectionContents :: Text -> [Text] -> Handler CourseSection
+sectionContents course spath = do
   lang <- fromMaybe "en" <$> lookupSession "_LANG"
-  return . section $ "courses" </> "contents" </> T.unpack name </> T.unpack lang
+  let sectionPath = System.FilePath.joinPath $ map T.unpack (course : lang : spath)
+  return . section $ "courses" </> "contents" </> sectionPath
 
 tryExts :: [FilePath] -> FilePath -> (FilePath -> IO a) -> IO (Maybe a)
 tryExts [] _ _ = return Nothing
