@@ -33,3 +33,5 @@ ViewCourse: View course
 CourseIsEmpty: This course is empty.
 Sections: Sections
 Problems: Problems
+
+SubmitSolution: Submit

@@ -9,5 +9,20 @@
       #{desc}
     $nothing
       _{MsgCourseNoDescription}
+
+    <hr>
+
+    $if webEditor
+      <form action=@{CourseProblemR courseId ppath} method=post role=form>
+        <div .row>
+          <div .input-group .col-lg-1>
+          <button .btn .btn-primary type="submit"> _{MsgSubmitSolution}
+        <span> &nbsp;
+        <div .form-group>
+          <textarea name="inPageCodeInput" #codeMirrorTextArea .form-control>
+            $maybe snippet <- msnippet
+              #{snippet}
   <div .col-lg-4>
-    
+    $maybe deadline <- mdeadline
+      <div .alert .alert-warning>
+        Deadline: #{deadline}
