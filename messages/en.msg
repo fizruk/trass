@@ -20,7 +20,12 @@ TeacherStartCourse: Start course
 TeacherNoCourses: There are no courses yet.
 TeacherSomeCourses count@Int: There are #{show count} courses.
 
+CoursesHeader: Courses list
+NoCourses: There are no courses yet.
+
 CourseTitle: Course title
 CourseNoTitle: No title
+CourseNoDescription: No description.
 CourseRepo: Repository name
 CourseAuthor: Author
+
