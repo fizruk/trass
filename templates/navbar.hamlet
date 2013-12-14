@@ -12,8 +12,14 @@
       <li>
         <a href="#"> Submits
     <p .navbar-text .navbar-right>
-      Signed in as
-      <a href="#"> Anonymous
+      $maybe auth <- ma
+        Signed in as
+        <a href="#"> #{userIdent (entityVal auth)}
+        (
+        <a href=@{AuthR LogoutR}> Sign out
+        )
+      $nothing
+        <a href=@{AuthR LoginR}> Sign in
     <ul .nav .navbar-nav .navbar-right>
       <li>
         <a href="#"> Teacher's corner
