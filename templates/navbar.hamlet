@@ -1,0 +1,27 @@
+<nav .navbar .navbar-default .navbar-static-top role="navigation">
+  <div .navbar-header>
+    <button type="button" .navbar-toggle data-toggle="collapse" data-target="#trass-navbar-collapse">
+    <a .navbar-brand href=@{HomeR}> Trass
+
+  <div .collapse .navbar-collapse #trass-navbar-collapse>
+    <ul .nav .navbar-nav>
+      <li>
+        <a href="#"> _{MsgNavCourses}
+      <li>
+        <a href="#"> _{MsgNavAssignments}
+      <li>
+        <a href="#"> _{MsgNavSubmits}
+    $maybe Entity _ user <- ma
+      <p .navbar-text .navbar-right>
+        _{MsgNavSignedInAs}
+        <a href="#"> #{userIdent user}
+        (
+        <a href=@{AuthR LogoutR}> _{MsgNavSignOut}
+        )
+      $if isTeacher user
+        <ul .nav .navbar-nav .navbar-right>
+          <li>
+            <a href=@{TeacherCornerR}> _{MsgNavTeacherCorner}
+    $nothing
+      <p .navbar-text .navbar-right>
+        <a href=@{AuthR LoginR}> _{MsgNavSignIn}

@@ -67,11 +67,20 @@ instance Yesod App where
         -- default-layout-wrapper is the entire page. Since the final
         -- value passed to hamletToRepHtml cannot be a widget, this allows
         -- you to use normal widget features in default-layout.
+        
+        ma <- maybeAuth
+
+        let navbarWidget = $(widgetFile "navbar")
 
         pc <- widgetToPageContent $ do
             $(combineStylesheets 'StaticR
                 [ css_normalize_css
                 , css_bootstrap_css
+                , css_bootstrap_theme_css
+                ])
+            $(combineScripts 'StaticR
+                [ js_jquery_js
+                , js_bootstrap_js
                 ])
             $(widgetFile "default-layout")
         giveUrlRenderer $(hamletFile "templates/default-layout-wrapper.hamlet")
@@ -138,6 +147,9 @@ instance YesodAuth App where
 -- achieve customized and internationalized form validation messages.
 instance RenderMessage App FormMessage where
     renderMessage _ _ = defaultFormMessage
+
+isTeacher :: User -> Bool
+isTeacher user = userIdent user == "crazy.fizruk@gmail.com"
 
 -- | Get the 'Extra' value, used to hold data from the settings.yml file.
 getExtra :: Handler Extra

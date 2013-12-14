@@ -1,0 +1,26 @@
+<h1>
+  _{MsgTeacherCoursesHeader}
+  <small> _{MsgTeacherCornerSubheader}
+
+$if null courses
+  <div .panel .panel-default>
+    <div .panel-body>
+      <p> _{MsgTeacherNoCourses}
+        <a .pull-right .btn .btn-success href=@{TeacherNewCourseR}> _{MsgTeacherStartNewCourse}
+$else
+  <div .panel .panel-default>
+    <div .panel-body>
+      <p> _{MsgTeacherSomeCourses (length courses)}
+        <a .pull-right .btn .btn-success href=@{TeacherNewCourseR}> _{MsgTeacherStartNewCourse}
+
+    <table .table>
+      <thead>
+        <th> _{MsgCourseTitle}
+        <th> _{MsgCourseRepo}
+        <th> _{MsgCourseAuthor}
+      <tbody>
+        $forall (title, repo, author) <- courses
+          <tr>
+            <td> #{title}
+            <td> #{repo}
+            <td> #{author}

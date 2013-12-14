@@ -21,6 +21,9 @@ library
                      Settings.StaticFiles
                      Settings.Development
                      Handler.Home
+                     Handler.TeacherCorner
+                     Handler.TeacherCourses
+                     Handler.TeacherNewCourse
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT
