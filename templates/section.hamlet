@@ -21,8 +21,12 @@
               _{MsgSections}
               <span .badge .pull-right> #{length sections}
           <div .list-group>
-            $forall section <- sections
-              <a href="#" .list-group-item> section
+            $forall (mtitle) <- sections
+              <a href="#" .list-group-item>
+                $maybe title <- mtitle
+                  #{title}
+                $nothing
+                  _{MsgCourseNoTitle}
       $if not (null problems)
         <div .panel .panel-default>
           <div .panel-heading>
@@ -30,5 +34,9 @@
               _{MsgProblems}
               <span .badge .pull-right> #{length problems}
           <div .list-group>
-            $forall problem <- problems
-              <a href="#" .list-group-item> problem
+            $forall (mtitle) <- problems
+              <a href="#" .list-group-item>
+                $maybe title <- mtitle
+                  #{title}
+                $nothing
+                  _{MsgCourseNoTitle}
