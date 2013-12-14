@@ -79,13 +79,13 @@ readDesc :: FilePath -> IO (Maybe Html)
 readDesc path = tryExts [".md", ".markdown"] (path </> "desc") readMarkdown
 
 readSubsections :: FilePath -> IO [CourseSection]
-readSubsections path = map section . sort . filter isSectionDir <$> getDirectoryContents path
+readSubsections path = map section . map (path </>) . sort . filter isSectionDir <$> getDirectoryContents path
   where
     isSectionDir (x:_) = isDigit x
     isSectionDir _ = False
 
 readProblems :: FilePath -> IO [CourseProblem]
-readProblems path = map problem . sort . filter isProblemDir <$> getDirectoryContents path
+readProblems path = map problem . map (path </>) . sort . filter isProblemDir <$> getDirectoryContents path
   where
     isProblemDir (x:y:_) = x == 'p' && isDigit y
     isProblemDir _ = False
