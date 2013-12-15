@@ -19,11 +19,12 @@
             <span .input-group-addon> _{MsgProgrammingLanguage}
             <div .input-group-btn>
               $if null languages
-                _{MsgNoProgrammingLanguage}
+                <button type="button" .btn .btn-default .disabled>
+                  _{MsgNoProgrammingLanguage}
               $else
                 <input type="hidden" name="submit_language" #submit_language value="#{head languages}">
                 $if null (tail languages)
-                  <button type="button" .btn .btn-default>
+                  <button type="button" .btn .btn-default .disabled>
                     #{head languages}
                 $else
                   <button type="button" .btn .btn-default .dropdown-toggle data-toggle="dropdown">
