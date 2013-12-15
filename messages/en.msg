@@ -35,3 +35,5 @@ Sections: Sections
 Problems: Problems
 
 SubmitSolution: Submit
+ProgrammingLanguage: Language:
+NoProgrammingLanguage: None

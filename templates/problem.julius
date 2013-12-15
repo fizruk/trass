@@ -1,1 +1,9 @@
+CodeMirror.modeURL = "@{StaticR codemirror_mode_haskell_haskell_js}".replace(/haskell/g, "%N");
 var codeMirror = CodeMirror.fromTextArea(codeMirrorTextArea);
+
+function codeMirrorSwitchMode(mode) {
+  codeMirror.setOption("mode", mode);
+  CodeMirror.autoLoadMode(codeMirror, mode);
+  $("#currentProgrammingLanguage").text(mode);
+  $("#submit_language").val(mode);
+}
