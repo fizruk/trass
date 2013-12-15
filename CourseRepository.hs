@@ -5,7 +5,7 @@ import Import
 import qualified Control.Exception as E
 
 import Data.Char
-import Data.List (sort, isPrefixOf)
+import Data.List
 import Data.Maybe
 
 import qualified Data.Text as T
@@ -38,6 +38,13 @@ data CourseProblem = CourseProblem
   , cpSnippet     :: IO (Maybe Text)
   , cpConfig      :: IO (Maybe Y.Config)
   }
+
+contentsBreadcrumbs :: Text -> [Text] -> Handler [([Text], Maybe Text)]
+contentsBreadcrumbs course path = do
+  let paths = tail (inits path)
+  sections <- mapM (sectionContents course) paths
+  titles   <- liftIO $ mapM csTitle sections
+  return $ zip paths titles
 
 courseContents404 :: Text -> Handler CourseRepository
 courseContents404 name = sectionContents404 name []
