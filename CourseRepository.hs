@@ -5,7 +5,7 @@ import Import
 import qualified Control.Exception as E
 
 import Data.Char
-import Data.List (sort)
+import Data.List (sort, isPrefixOf)
 import Data.Maybe
 
 import qualified Data.Text as T
@@ -100,7 +100,9 @@ readTitle :: FilePath -> IO (Maybe Text)
 readTitle path = tryExts [".txt"] (path </> "title") T.readFile
 
 readSnippet :: FilePath -> IO (Maybe Text)
-readSnippet path = tryExts [".hs"] (path </> "snippet") T.readFile
+readSnippet path = do
+  exts <- map takeExtension . filter ("snippet." `isPrefixOf`) <$> getDirectoryContents path
+  tryExts exts (path </> "snippet") T.readFile
 
 readSummary :: FilePath -> IO (Maybe Html)
 readSummary path = tryExts [".md", ".markdown"] (path </> "summary") readMarkdown
