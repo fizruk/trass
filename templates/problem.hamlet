@@ -1,3 +1,23 @@
+$if not (null breadcrumbs)
+  <ol .breadcrumb>
+    <li>
+      <a href=@{CourseR courseId}>
+        $maybe title <- courseTitle
+          #{title}
+        $nothing
+          _{MsgCourseNoTitle}
+    $forall (path, mtitle) <- breadcrumbs
+      <li>
+        <a href=@{CourseSectionR courseId path}>
+          $maybe title <- mtitle
+            #{title}
+          $nothing
+            _{MsgCourseNoTitle}
+    <li .active>
+      $maybe title <- mtitle
+        #{title}
+      $nothing
+        _{MsgCourseNoTitle}
 <h1>
   $maybe title <- mtitle
     #{title}

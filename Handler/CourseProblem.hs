@@ -12,6 +12,8 @@ getCourseProblemR courseId ppath = do
   course <- runDB $ get404 courseId
   let name = courseName course
   cp <- problemContents404 name ppath
+  courseTitle <- courseContents name >>= liftIO . csTitle
+  breadcrumbs <- contentsBreadcrumbs name (init ppath)
   mtitle    <- liftIO $ cpTitle cp
   mdesc     <- liftIO $ cpDescription cp
   msnippet  <- liftIO $ cpSnippet cp
