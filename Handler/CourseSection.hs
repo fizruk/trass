@@ -5,13 +5,15 @@ import CourseRepository
 import Control.Monad
 import qualified Data.Text as T
 import System.FilePath
-import Data.List (last)
+import Data.List (last, init)
 
 getCourseSectionR :: CourseId -> [Text] -> Handler Html
 getCourseSectionR courseId spath = do
   course <- runDB $ get404 courseId
   let name = courseName course
   cr <- sectionContents404 name spath
+  courseTitle <- courseContents name >>= liftIO . csTitle
+  breadcrumbs <- contentsBreadcrumbs name (init spath)
   mtitle <- liftIO $ csTitle cr
   mdesc  <- liftIO $ csDescription cr
   ss     <- liftIO $ csSubsections cr
@@ -25,4 +27,5 @@ getCourseSectionR courseId spath = do
     title <- liftIO $ cpTitle p
     return ([path], title)
   defaultLayout $ do
+    $(widgetFile "course-breadcrumbs")
     $(widgetFile "section")

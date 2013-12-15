@@ -28,6 +28,7 @@ getCourseProblemR courseId ppath = do
     case (msum $ map codeMirrorMode languages) of
       Just mode_js -> addScript mode_js
       Nothing      -> return ()
+    $(widgetFile "course-breadcrumbs")
     $(widgetFile "problem")
 
 postCourseProblemR :: CourseId -> [Text] -> Handler Html
