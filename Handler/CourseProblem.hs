@@ -27,3 +27,6 @@ getCourseProblemR courseId ppath = do
       Just mode_js -> addScript mode_js
       Nothing      -> return ()
     $(widgetFile "problem")
+
+postCourseProblemR :: CourseId -> [Text] -> Handler Html
+postCourseProblemR courseId ppath = error "Not implemented yet"
